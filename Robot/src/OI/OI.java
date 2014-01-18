@@ -16,8 +16,8 @@ public class OI {
     public static final int leftJoystickInputValue = 2;
     
     // two joySticks for the operator to work with
-    public static JoystickMan right_Joystick;
-    public static JoystickMan left_Joystick;
+    public static Enjoystick right_Joystick;
+    public static Enjoystick left_Joystick;
     
     //Inits all OI Objects
     public static void init(){
@@ -26,11 +26,11 @@ public class OI {
     }
     
     private static void initRightStick(){
-        right_Joystick = new JoystickMan(new Joystick(rightJoystickInputValue));
+        right_Joystick = new Enjoystick(new Joystick(rightJoystickInputValue));
     }
     
     
     private static void initLeftStick(){
-        left_Joystick = new JoystickMan(new Joystick(leftJoystickInputValue));
+        left_Joystick = new Enjoystick(new Joystick(leftJoystickInputValue));
     }
 }

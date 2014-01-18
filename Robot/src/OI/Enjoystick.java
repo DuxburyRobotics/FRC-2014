@@ -10,14 +10,14 @@ import edu.wpi.first.wpilibj.command.Command;
  * 
  * Creates and init's Joysticks and their buttons
  */
-public class JoystickMan {
+public class Enjoystick {
 
     public static final int amountOfButtons = 20;
     
     private final Joystick joystick;
     private final JoystickButton[] buttons;
     
-    public JoystickMan(Joystick joystick){
+    public Enjoystick(Joystick joystick){
         this.joystick = joystick;
         buttons = new JoystickButton[amountOfButtons];
         //buttons = new Hashtable();

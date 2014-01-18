@@ -10,15 +10,15 @@ import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
- * @author Evan
+ * @author Tate
  */
-public class AutonomousC extends Command {
+public class AbsorbBallCommand extends Command {
 
     protected void initialize() {
     }
 
     protected void execute() {
-        //System.out.println("called");
+        
     }
 
     protected boolean isFinished() {
@@ -26,11 +26,8 @@ public class AutonomousC extends Command {
     }
 
     protected void end() {
-        
     }
 
     protected void interrupted() {
-        end();
     }
-    
 }

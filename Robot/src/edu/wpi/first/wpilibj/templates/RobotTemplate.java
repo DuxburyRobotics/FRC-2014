@@ -8,12 +8,13 @@
 package edu.wpi.first.wpilibj.templates;
 
 
-import OI.JoystickMan;
+import OI.Enjoystick;
 import OI.OI;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SimpleRobot;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.templates.commands.AbsorbBallCommand;
 import subsystems.DriveTrain;
 
 /**
