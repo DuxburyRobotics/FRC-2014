@@ -11,10 +11,14 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  * @author Tate
+ * 
+ * This command shall be called whenever the capture motor needs to spin forward
+ * in order to capture the ball.
  */
 public class AbsorbBallCommand extends Command {
 
     protected void initialize() {
+        
     }
 
     protected void execute() {
@@ -26,8 +30,10 @@ public class AbsorbBallCommand extends Command {
     }
 
     protected void end() {
+        
     }
 
     protected void interrupted() {
+        
     }
 }
