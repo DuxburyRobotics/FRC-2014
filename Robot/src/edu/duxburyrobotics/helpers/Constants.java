@@ -13,7 +13,8 @@ package edu.duxburyrobotics.helpers;
 public class Constants {
     /* Device ports */
     public static final int MOTOR_PORT_LEFT = 2;
-    public static final int MOTORPORT_RIGHT = 1;
+    public static final int MOTOR_PORT_RIGHT = 1;
+    public static final int MOTOR_PORT_CAPTURE = 3;
     
     /* DriveTrain constants */
     public static final double DRIVE_SENSITIVITY = 0.2;

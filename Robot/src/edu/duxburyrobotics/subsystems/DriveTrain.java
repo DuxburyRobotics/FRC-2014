@@ -28,7 +28,7 @@ public class DriveTrain extends RobotDrive{
      * 
      * @param stick Joystick to take input from
      */
-    public void twistThrottleDrive(Joystick stick) {
+    public void twistThrottleDrive(final Joystick stick) {
         double throttleData = stick.getThrottle();
         if (throttleData == 0)
             throttleData = Constants.DRIVE_MIN_POWER;

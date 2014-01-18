@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SimpleRobot;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Victor;
-import edu.duxburyrobotics.commands.AbsorbBallCommand;
+import edu.duxburyrobotics.commands.CaptureBallCommand;
 import edu.duxburyrobotics.helpers.Constants;
 import edu.duxburyrobotics.subsystems.DriveTrain;
 
@@ -36,7 +36,7 @@ public class RobotMain extends SimpleRobot {
         OI.init();
         
         //create speed Controllers   TODO create custom drive train class
-        SpeedController right_Motor = new Victor(1, Constants.MOTORPORT_RIGHT);
+        SpeedController right_Motor = new Victor(1, Constants.MOTOR_PORT_RIGHT);
         SpeedController left_Motor = new Victor(1,Constants.MOTOR_PORT_LEFT);
         
         drive = new DriveTrain(left_Motor, right_Motor);
@@ -72,7 +72,7 @@ public class RobotMain extends SimpleRobot {
         
         while (isEnabled() && isOperatorControl()){
             //drive.arcadeDrive(OI.right_Joystick.getJoystick());
-            
+
             drive.twistThrottleDrive(OI.right_Joystick.getJoystick());
         }
     }
