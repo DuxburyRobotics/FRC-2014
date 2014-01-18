@@ -1,5 +1,5 @@
 
-package OI;
+package edu.duxburyrobotics.io;
 
 import edu.wpi.first.wpilibj.Joystick;
 

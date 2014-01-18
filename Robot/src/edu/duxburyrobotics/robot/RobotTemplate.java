@@ -5,17 +5,17 @@
 /* the project.                
 /*----------------------------------------------------------------------------*/
 
-package edu.wpi.first.wpilibj.templates;
+package edu.duxburyrobotics.robot;
 
 
-import OI.Enjoystick;
-import OI.OI;
+import edu.duxburyrobotics.io.Enjoystick;
+import edu.duxburyrobotics.io.OI;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SimpleRobot;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Victor;
-import edu.wpi.first.wpilibj.templates.commands.AbsorbBallCommand;
-import subsystems.DriveTrain;
+import edu.duxburyrobotics.commands.AbsorbBallCommand;
+import edu.duxburyrobotics.subsystems.DriveTrain;
 
 /**
  * The VM is configured to automatically run this class, and to call the

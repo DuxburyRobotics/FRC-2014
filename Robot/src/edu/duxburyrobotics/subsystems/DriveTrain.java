@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package subsystems;
+package edu.duxburyrobotics.subsystems;
 
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SpeedController;

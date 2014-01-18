@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package edu.wpi.first.wpilibj.templates.commands;
+package edu.duxburyrobotics.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  * @author Evan
  */
-public class AutonomousC extends Command {
+public class AutonomousCommand extends Command {
 
     protected void initialize() {
     }
