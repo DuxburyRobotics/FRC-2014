@@ -18,5 +18,7 @@ public class Constants {
     
     /* DriveTrain constants */
     public static final double DRIVE_SENSITIVITY = 0.2;
-    public static final double DRIVE_MIN_POWER = 0.1;
+    public static final double DRIVE_MIN_POWER = 0.55;
+    public static final double DRIVE_TURN_MULTIPLIER = 1.0;
+    public static final double DRIVE_BOOST = 1.5;
 }

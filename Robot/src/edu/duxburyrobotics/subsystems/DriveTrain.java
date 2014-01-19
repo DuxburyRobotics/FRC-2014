@@ -7,6 +7,7 @@
 package edu.duxburyrobotics.subsystems;
 
 import edu.duxburyrobotics.helpers.Constants;
+import edu.duxburyrobotics.io.OI;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SpeedController;
@@ -28,14 +29,26 @@ public class DriveTrain extends RobotDrive{
      * 
      * @param stick Joystick to take input from
      */
-    public void twistThrottleDrive(final Joystick stick) {
-        double throttleData = stick.getThrottle();
-        if (throttleData == 0)
-            throttleData = Constants.DRIVE_MIN_POWER;
-        double driveSpeed = stick.getY() * throttleData;
-        double turnSpeed = stick.getTwist() * throttleData;
+    public void twistThrottleDrive(final Joystick stick, double speedModifier) {
+        double throttleData = (stick.getThrottle() * -1.0 + 1.0) / 2.0;
+        double newData = (((throttleData) * (1.0 - Constants.DRIVE_MIN_POWER)) / 1.0) + Constants.DRIVE_MIN_POWER; //Don't touch, magic ahead.      
+                
+        double driveSpeed = stick.getY() * newData * speedModifier;
+        double turnSpeed = stick.getTwist() * newData * Constants.DRIVE_TURN_MULTIPLIER * speedModifier;
         
         this.arcadeDrive(driveSpeed, turnSpeed);
+    }
+    
+    public void drive(){
+        
+        double speedMod = 1.0;
+        if (OI.right_Joystick.getButton(2).get()) {            
+            arcadeDrive(OI.right_Joystick.getJoystick()); //TODO: Implement throttle control
+        } else{
+            if(OI.right_Joystick.getButton(1).get())
+                speedMod *= Constants.DRIVE_BOOST;
+            twistThrottleDrive(OI.right_Joystick.getJoystick(), speedMod);
+        }
     }
     
     public void superdrive(){

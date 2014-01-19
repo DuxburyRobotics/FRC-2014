@@ -27,6 +27,8 @@ public class OI {
     
     private static void initRightStick(){
         right_Joystick = new Enjoystick(new Joystick(rightJoystickInputValue));
+        right_Joystick.createButton(2);
+        right_Joystick.createButton(1);
     }
     
     

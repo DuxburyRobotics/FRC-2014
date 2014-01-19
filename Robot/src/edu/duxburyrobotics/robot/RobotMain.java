@@ -72,8 +72,7 @@ public class RobotMain extends SimpleRobot {
         
         while (isEnabled() && isOperatorControl()){
             //drive.arcadeDrive(OI.right_Joystick.getJoystick());
-
-            drive.twistThrottleDrive(OI.right_Joystick.getJoystick());
+            drive.drive();
         }
     }
     

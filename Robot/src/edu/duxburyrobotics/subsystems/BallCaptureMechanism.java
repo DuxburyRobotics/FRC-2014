@@ -7,7 +7,7 @@
 package edu.duxburyrobotics.subsystems;
 
 import edu.duxburyrobotics.helpers.Constants;
-import edu.wpi.first.wpilibj.Jaguar;
+import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -16,10 +16,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class BallCaptureMechanism extends Subsystem {
     
-    private final Jaguar captureMotorController;
+    private final Victor captureMotorController;
     
     public BallCaptureMechanism() {
-        captureMotorController = new Jaguar(1, Constants.MOTOR_PORT_CAPTURE);
+        captureMotorController = new Victor(1, Constants.MOTOR_PORT_CAPTURE);
     }
 
     protected void initDefaultCommand() {
