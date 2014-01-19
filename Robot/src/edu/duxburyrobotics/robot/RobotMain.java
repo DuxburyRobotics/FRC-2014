@@ -14,7 +14,8 @@ import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SimpleRobot;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Victor;
-import edu.duxburyrobotics.commands.AbsorbBallCommand;
+import edu.duxburyrobotics.commands.CaptureBallCommand;
+import edu.duxburyrobotics.helpers.Constants;
 import edu.duxburyrobotics.subsystems.DriveTrain;
 
 /**
@@ -26,25 +27,24 @@ import edu.duxburyrobotics.subsystems.DriveTrain;
  * 
  * @author Ben
  */
-public class RobotTemplate extends SimpleRobot {
+public class RobotMain extends SimpleRobot {
     
     private static DriveTrain drive;
     
-    public RobotTemplate(){
+    public RobotMain(){
         //INITS ALL OI OBJECTS
         OI.init();
         
         //create speed Controllers   TODO create custom drive train class
-        SpeedController right_Motor = new Victor(1,1);
-        SpeedController left_Motor = new Victor(1,2);
-        
+        SpeedController right_Motor = new Victor(1, Constants.MOTOR_PORT_RIGHT);
+        SpeedController left_Motor = new Victor(1,Constants.MOTOR_PORT_LEFT);
         
         drive = new DriveTrain(left_Motor, right_Motor);
         drive.setMaxOutput(1.0f);
         drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
         drive.setInvertedMotor(RobotDrive.MotorType.kRearRight , true);
    
-        drive.setSensitivity(0.2f);
+        drive.setSensitivity(Constants.DRIVE_SENSITIVITY);
     }
     
     /**
@@ -54,6 +54,7 @@ public class RobotTemplate extends SimpleRobot {
         System.out.println("Autonomous Method Called");
         drive.setSafetyEnabled(false);
         
+        //TODO: Robot needs to drive forward
     }
 
     /**
@@ -70,10 +71,10 @@ public class RobotTemplate extends SimpleRobot {
         drive.setSafetyEnabled(true);
         
         while (isEnabled() && isOperatorControl()){
-            drive.arcadeDrive(OI.right_Joystick.getJoystick());
-            
+            //drive.arcadeDrive(OI.right_Joystick.getJoystick());
+
+            drive.twistThrottleDrive(OI.right_Joystick.getJoystick());
         }
-        
     }
     
     /**
