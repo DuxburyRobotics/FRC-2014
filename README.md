@@ -8,6 +8,9 @@ The following commands should be entered into
 the GIT Bash program.
 Anything inside of <> (ie <branch_name>) is a custom string.
 
+### UPDATE: always branch from the develop branch! Never commit the master branch and only commit to the develop branch when the whole team has agreed
+that it is stable!
+
 #### Getting the latest version of the stable code for the first time:
 
 	Clone the repository into an empty directory:
