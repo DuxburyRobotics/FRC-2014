@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -56,5 +57,6 @@ public class DriveTrain extends RobotDrive{
     public void superdrive(){
         //SUPER AWESOME DRIVING METHODE HERE
         //FAPFAPFAPFAPFAP ;D 
+        this.tankDrive(1.0f, 1.0f);
     }
 }

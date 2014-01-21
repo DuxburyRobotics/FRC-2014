@@ -8,15 +8,15 @@
 package edu.duxburyrobotics.robot;
 
 
-import edu.duxburyrobotics.io.Enjoystick;
 import edu.duxburyrobotics.io.OI;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SimpleRobot;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Victor;
-import edu.duxburyrobotics.commands.CaptureBallCommand;
 import edu.duxburyrobotics.helpers.Constants;
+import edu.duxburyrobotics.subsystems.BallCaptureMechanism;
 import edu.duxburyrobotics.subsystems.DriveTrain;
+import edu.duxburyrobotics.subsystems.Pnumatics;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -30,10 +30,14 @@ import edu.duxburyrobotics.subsystems.DriveTrain;
 public class RobotMain extends SimpleRobot {
     
     private static DriveTrain drive;
+    public static Pnumatics pnumatics;
+    public static BallCaptureMechanism ballCaptureMechanism;
     
     public RobotMain(){
         //INITS ALL OI OBJECTS
         OI.init();
+        pnumatics = new Pnumatics();
+        ballCaptureMechanism = new BallCaptureMechanism();
         
         //create speed Controllers   TODO create custom drive train class
         SpeedController right_Motor = new Victor(1, Constants.MOTOR_PORT_RIGHT);
@@ -53,7 +57,11 @@ public class RobotMain extends SimpleRobot {
     public void autonomous() {
         System.out.println("Autonomous Method Called");
         drive.setSafetyEnabled(false);
-        
+        for (int i = 0; i < 1000; i++)
+        {
+            drive.superdrive();
+        }
+        drive.drive(0,0);
         //TODO: Robot needs to drive forward
     }
 
@@ -71,8 +79,8 @@ public class RobotMain extends SimpleRobot {
         drive.setSafetyEnabled(true);
         
         while (isEnabled() && isOperatorControl()){
-            //drive.arcadeDrive(OI.right_Joystick.getJoystick());
             drive.drive();
+            pnumatics.update();
         }
     }
     

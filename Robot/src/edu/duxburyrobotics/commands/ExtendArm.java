@@ -11,24 +11,20 @@ import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
- * @author Tate
- * 
- * This command shall be called whenever the capture motor needs to spin forward
- * in order to capture the ball.
+ * @author Evan
  */
-public class CaptureBallCommand extends Command {
-
-    public CaptureBallCommand()
-    {
-        requires(RobotMain.ballCaptureMechanism);
-    }
+public class ExtendArm extends Command{
     
+    public ExtendArm()
+    {
+        requires(RobotMain.pnumatics);
+    }
+
     protected void initialize() {
-        
     }
 
     protected void execute() {
-        RobotMain.ballCaptureMechanism.captureBall();
+        RobotMain.pnumatics.extend();
     }
 
     protected boolean isFinished() {
@@ -36,10 +32,11 @@ public class CaptureBallCommand extends Command {
     }
 
     protected void end() {
-        RobotMain.ballCaptureMechanism.stopCapturing();
+        RobotMain.pnumatics.stopMoving();
     }
 
     protected void interrupted() {
         end();
     }
+    
 }
