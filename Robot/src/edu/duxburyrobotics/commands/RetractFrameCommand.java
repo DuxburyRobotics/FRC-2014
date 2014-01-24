@@ -13,18 +13,14 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  * @author Evan
  */
-public class RetractArm extends Command{
-    
-    public RetractArm()
-    {
-        requires(RobotMain.pnumatics);
-    }
+public class RetractFrameCommand extends Command{
 
     protected void initialize() {
+        requires(RobotMain.ballCaptureFrame);
     }
 
     protected void execute() {
-        RobotMain.pnumatics.retract();
+        RobotMain.ballCaptureFrame.retract();
     }
 
     protected boolean isFinished() {
@@ -32,7 +28,7 @@ public class RetractArm extends Command{
     }
 
     protected void end() {
-        RobotMain.pnumatics.stopMoving();
+        RobotMain.ballCaptureFrame.stopMoving();
     }
 
     protected void interrupted() {

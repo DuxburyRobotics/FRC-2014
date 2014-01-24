@@ -17,14 +17,9 @@ import edu.wpi.first.wpilibj.command.Command;
  * in order to capture the ball.
  */
 public class CaptureBallCommand extends Command {
-
-    public CaptureBallCommand()
-    {
-        requires(RobotMain.ballCaptureMechanism);
-    }
     
     protected void initialize() {
-        
+        requires(RobotMain.ballCaptureMechanism);
     }
 
     protected void execute() {

@@ -8,6 +8,8 @@
 package edu.duxburyrobotics.robot;
 
 
+import edu.duxburyrobotics.commands.CaptureBallCommand;
+import edu.duxburyrobotics.commands.ToggleFrameCommand;
 import edu.duxburyrobotics.io.OI;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SimpleRobot;
@@ -16,7 +18,8 @@ import edu.wpi.first.wpilibj.Victor;
 import edu.duxburyrobotics.helpers.Constants;
 import edu.duxburyrobotics.subsystems.BallCaptureMechanism;
 import edu.duxburyrobotics.subsystems.DriveTrain;
-import edu.duxburyrobotics.subsystems.Pnumatics;
+import edu.duxburyrobotics.subsystems.BallCaptureFrame;
+import edu.wpi.first.wpilibj.Timer;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -30,16 +33,26 @@ import edu.duxburyrobotics.subsystems.Pnumatics;
 public class RobotMain extends SimpleRobot {
     
     private static DriveTrain drive;
-    public static Pnumatics pnumatics;
+    public static BallCaptureFrame ballCaptureFrame;
     public static BallCaptureMechanism ballCaptureMechanism;
     
     public RobotMain(){
-        //INITS ALL OI OBJECTS
-        OI.init();
-        pnumatics = new Pnumatics();
+        initOI();
+        initDriveTrain();
+    }
+    
+    private void initOI() {
+         OI.init();
+         
+         //The following joystick buttons need to be changed
+         OI.left_Joystick.getButton(Constants.BUTTON_CAPTURE_BALL).whenPressed(new CaptureBallCommand());
+         OI.right_Joystick.getButton(Constants.BUTTON_TOGGLE_FRAME).whenPressed(new ToggleFrameCommand());
+    }
+    
+    private void initDriveTrain() {
+        ballCaptureFrame = new BallCaptureFrame();
         ballCaptureMechanism = new BallCaptureMechanism();
         
-        //create speed Controllers   TODO create custom drive train class
         SpeedController right_Motor = new Victor(1, Constants.MOTOR_PORT_RIGHT);
         SpeedController left_Motor = new Victor(1,Constants.MOTOR_PORT_LEFT);
         
@@ -55,14 +68,26 @@ public class RobotMain extends SimpleRobot {
      * This function is called once each time the robot enters autonomous mode.
      */
     public void autonomous() {
-        System.out.println("Autonomous Method Called");
+        System.out.println("Autonomous Mode Enabled");
+        
+        /* Old auto driving
         drive.setSafetyEnabled(false);
         for (int i = 0; i < 1000; i++)
-        {
-            drive.superdrive();
-        }
-        drive.drive(0,0);
-        //TODO: Robot needs to drive forward
+            drive.autonomousDrive(1.0);
+        */
+        
+        /*
+        Test for possibly better autonomous driving
+        This makes it time based instead of iteration based.
+        Better because our variable is a constant time, not 
+        iterations which may change slightly depending on
+        conditions in the CPU
+        */
+        
+        drive.setSafetyEnabled(false);
+        drive.autonomousDrive(1.0);
+        Timer.delay(8.5);
+        drive.stopDriving();
     }
 
     /**
@@ -79,8 +104,8 @@ public class RobotMain extends SimpleRobot {
         drive.setSafetyEnabled(true);
         
         while (isEnabled() && isOperatorControl()){
-            drive.drive();
-            pnumatics.update();
+            drive.twistThrottleDrive(OI.right_Joystick.getJoystick(), 
+                    OI.right_Joystick.getButton(Constants.BUTTON_SPEED_BOOST).get());
         }
     }
     

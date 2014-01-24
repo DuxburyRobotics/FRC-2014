@@ -13,18 +13,14 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  * @author Evan
  */
-public class ExtendArm extends Command{
+public class ExtendFrameCommand extends Command{
     
-    public ExtendArm()
-    {
-        requires(RobotMain.pnumatics);
-    }
-
     protected void initialize() {
+        requires(RobotMain.ballCaptureFrame);
     }
 
     protected void execute() {
-        RobotMain.pnumatics.extend();
+        RobotMain.ballCaptureFrame.extend();
     }
 
     protected boolean isFinished() {
@@ -32,7 +28,7 @@ public class ExtendArm extends Command{
     }
 
     protected void end() {
-        RobotMain.pnumatics.stopMoving();
+        RobotMain.ballCaptureFrame.stopMoving();
     }
 
     protected void interrupted() {
