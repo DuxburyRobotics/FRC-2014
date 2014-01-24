@@ -45,7 +45,7 @@ public class RobotMain extends SimpleRobot {
          OI.init();
          
          //The following joystick buttons need to be changed
-         OI.left_Joystick.getButton(Constants.BUTTON_CAPTURE_BALL).whenPressed(new CaptureBallCommand());
+         OI.left_Joystick.getButton(Constants.BUTTON_CAPTURE_BALL).whileHeld(new CaptureBallCommand());
          OI.right_Joystick.getButton(Constants.BUTTON_TOGGLE_FRAME).whenPressed(new ToggleFrameCommand());
     }
     
@@ -75,7 +75,6 @@ public class RobotMain extends SimpleRobot {
         for (int i = 0; i < 1000; i++)
             drive.autonomousDrive(1.0);
         */
-        
         /*
         Test for possibly better autonomous driving
         This makes it time based instead of iteration based.
