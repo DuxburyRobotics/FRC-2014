@@ -26,7 +26,7 @@ public class BallCaptureFrame extends Subsystem{
         _isFrameExtended = false;
         compressor = new Compressor(1, 1); //TODO: these values need to be changed for actual values
         leftSolenoid = new DoubleSolenoid(4, 5); //TODO: these values must be verified as well
-        rightSolenoid = new DoubleSolenoid(4, 5); //TODO: same with these        
+        rightSolenoid = new DoubleSolenoid(6, 7); //TODO: same with these        
         
         compressor.start();
     }

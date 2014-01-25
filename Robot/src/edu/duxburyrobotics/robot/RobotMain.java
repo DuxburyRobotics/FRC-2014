@@ -19,6 +19,7 @@ import edu.duxburyrobotics.helpers.Constants;
 import edu.duxburyrobotics.subsystems.BallCaptureMechanism;
 import edu.duxburyrobotics.subsystems.DriveTrain;
 import edu.duxburyrobotics.subsystems.BallCaptureFrame;
+import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.Timer;
 
 /**
@@ -32,12 +33,13 @@ import edu.wpi.first.wpilibj.Timer;
  */
 public class RobotMain extends SimpleRobot {
     
-    private static DriveTrain drive;
+    public static DriveTrain drive;
     public static BallCaptureFrame ballCaptureFrame;
     public static BallCaptureMechanism ballCaptureMechanism;
     
     public RobotMain(){
         initOI();
+        initSubsystems();
         initDriveTrain();
     }
     
@@ -45,21 +47,26 @@ public class RobotMain extends SimpleRobot {
          OI.init();
          
          //The following joystick buttons need to be changed
-         OI.left_Joystick.getButton(Constants.BUTTON_CAPTURE_BALL).whileHeld(new CaptureBallCommand());
-         OI.right_Joystick.getButton(Constants.BUTTON_TOGGLE_FRAME).whenPressed(new ToggleFrameCommand());
+         //OI.left_Joystick.getButton(Constants.BUTTON_CAPTURE_BALL).whileHeld(new CaptureBallCommand());
+         //OI.right_Joystick.getButton(Constants.BUTTON_TOGGLE_FRAME).whenPressed(new ToggleFrameCommand());
     }
     
-    private void initDriveTrain() {
+    private void initSubsystems() {
         ballCaptureFrame = new BallCaptureFrame();
         ballCaptureMechanism = new BallCaptureMechanism();
+    }
+    
+    private void initDriveTrain() {        
+        Jaguar rightMotor1 = new Jaguar(1, Constants.MOTOR_PORT_RIGHT1);
+        Jaguar leftMotor1 = new Jaguar(1, Constants.MOTOR_PORT_LEFT1);
+        Victor rightMotor2 = new Victor(1, Constants.MOTOR_PORT_RIGHT2);
+        Victor leftMotor2 = new Victor(1, Constants.MOTOR_PORT_LEFT2);
         
-        SpeedController right_Motor = new Victor(1, Constants.MOTOR_PORT_RIGHT);
-        SpeedController left_Motor = new Victor(1,Constants.MOTOR_PORT_LEFT);
-        
-        drive = new DriveTrain(left_Motor, right_Motor);
-        drive.setMaxOutput(1.0f);
+        drive = new DriveTrain(leftMotor1, leftMotor2, rightMotor1, rightMotor2);
+        drive.setMaxOutput(Constants.DRIVE_MAX_POWER);
         drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
         drive.setInvertedMotor(RobotDrive.MotorType.kRearRight , true);
+        //TODO: Invert extra motors if necessary!
    
         drive.setSensitivity(Constants.DRIVE_SENSITIVITY);
     }
@@ -83,9 +90,11 @@ public class RobotMain extends SimpleRobot {
         conditions in the CPU
         */
         
+        //This drives exactly 10 feet (including drift) with the bumpers
+        //attached
         drive.setSafetyEnabled(false);
-        drive.autonomousDrive(1.0);
-        Timer.delay(8.5);
+        drive.autonomousDrive(0.75);
+        Timer.delay(2.5);
         drive.stopDriving();
     }
 

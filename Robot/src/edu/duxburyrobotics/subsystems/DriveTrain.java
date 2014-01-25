@@ -19,10 +19,16 @@ import edu.wpi.first.wpilibj.SpeedController;
  * Creates a subclass of RobotDrive to specify our RobotDrive
  */
 public class DriveTrain extends RobotDrive{
-
+    
+    public DriveTrain(SpeedController frontLeftMotor, SpeedController rearLeftMotor, SpeedController frontRightMotor, SpeedController rearRightMotor) {
+        super(frontLeftMotor, rearLeftMotor, frontRightMotor, rearRightMotor);
+    }
+    
+    /*
     public DriveTrain(SpeedController leftMotor, SpeedController rightMotor) {
         super(leftMotor, rightMotor);
     }
+    */
     
     /**
      * This method should use the twist value of the joystick for turning
@@ -50,7 +56,7 @@ public class DriveTrain extends RobotDrive{
      * between twist turning and x-axis turning. x-axis turning sucks, so 
      * hopefully this is just for debug...
      */
-    public void drive(){
+    public void driveDebug(){
         if (OI.right_Joystick.getButton(2).get())       
             arcadeDrive(OI.right_Joystick.getJoystick()); //TODO: Implement throttle control
         else
