@@ -47,8 +47,8 @@ public class RobotMain extends SimpleRobot {
          OI.init();
          
          //The following joystick buttons need to be changed
-         //OI.left_Joystick.getButton(Constants.BUTTON_CAPTURE_BALL).whileHeld(new CaptureBallCommand());
-         //OI.right_Joystick.getButton(Constants.BUTTON_TOGGLE_FRAME).whenPressed(new ToggleFrameCommand());
+         OI.left_Joystick.getButton(Constants.BUTTON_CAPTURE_BALL).whileHeld(new CaptureBallCommand());
+         OI.right_Joystick.getButton(Constants.BUTTON_TOGGLE_FRAME).whenPressed(new ToggleFrameCommand());
     }
     
     private void initSubsystems() {
@@ -121,6 +121,6 @@ public class RobotMain extends SimpleRobot {
      * This function is called once each time the robot enters test mode.
      */
     public void test() {
-        System.out.println("TESTMODE ACTIVATED");
+        System.out.println("TESTMODE ACTIVATED LELELELELELE");
     }
 }

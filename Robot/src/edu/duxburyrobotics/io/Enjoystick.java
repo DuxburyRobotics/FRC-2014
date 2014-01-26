@@ -6,7 +6,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
- * @author Ben, Evan
+ * @author Ben, Evan, (and now Tate harharharharhar)
  * 
  * Creates and init's Joysticks and their buttons
  */
@@ -29,16 +29,24 @@ public class Enjoystick {
     
     /**
      *getButton returns a button at a position. 
-     * @param pos -the position of the button 0 - (amountOfButtons - 1)
-     * @return -JoystickButton at the position requested
+     * @param pos the position of the button 0 - (amountOfButtons - 1)
+     * @return JoystickButton at the position requested
      */
     public JoystickButton getButton(int pos)
     {
-        //if button is null inform us on console
-        if(buttons[pos] == null)
-        {
+        if(buttons[pos] == null) {
+            /*
             System.err.println("Button " + pos + " is null");
             return null;
+            */
+            
+            //If button is null, inform us, but create it and return it.
+            //Buttons should still be created before hand as an optimization!
+            
+            System.err.println("Button[" + pos + "] is null, creating now!");
+            System.err.println("Button should be preloaded!");
+            
+            createButton(pos);
         }
     
         return buttons[pos];
@@ -86,20 +94,22 @@ public class Enjoystick {
         //can catch several errorrs where Button is alredy created
         checkCreation(pos);
         buttons[pos] = new JoystickButton(joystick, pos);
-     //buttons.put(pos,new JoystickButton(joystick, pos.intValue()));
+        //buttons.put(pos,new JoystickButton(joystick, pos.intValue()));
     }
+    
     public void createButton(int location,int pos){
         // if needed:
         //can catch several errorrs where Button is alredy created
         checkCreation(location);
         buttons[location] = new JoystickButton(joystick, pos);
-     //buttons.put(pos,new JoystickButton(joystick, pos.intValue()));
+        //buttons.put(pos,new JoystickButton(joystick, pos.intValue()));
     }
     public boolean checkCreation(int pos){
         //checks if button is going to be overwritten
         if(buttons[pos] != null){
             System.err.println("Overrides Button ...");
         }
+        
         return true;
     }
     

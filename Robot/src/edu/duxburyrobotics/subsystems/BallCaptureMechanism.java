@@ -22,9 +22,7 @@ public class BallCaptureMechanism extends Subsystem {
         captureMotorController = new Victor(1, Constants.MOTOR_PORT_CAPTURE);
     }
 
-    protected void initDefaultCommand() {
-        //No default command for this subsystem
-    }
+    protected void initDefaultCommand() {}
     
     public void captureBall() {
         captureMotorController.set(1.0);

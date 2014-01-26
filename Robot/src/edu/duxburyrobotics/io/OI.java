@@ -1,6 +1,7 @@
 
 package edu.duxburyrobotics.io;
 
+import edu.duxburyrobotics.helpers.Constants;
 import edu.wpi.first.wpilibj.Joystick;
 
 /**
@@ -27,12 +28,14 @@ public class OI {
     
     private static void initRightStick(){
         right_Joystick = new Enjoystick(new Joystick(rightJoystickInputValue));
-        right_Joystick.createButton(2);
-        right_Joystick.createButton(1);
+        right_Joystick.createButton(Constants.BUTTON_SPEED_BOOST);
+        right_Joystick.createButton(Constants.BUTTON_TOGGLE_FRAME);
     }
     
     
     private static void initLeftStick(){
         left_Joystick = new Enjoystick(new Joystick(leftJoystickInputValue));
+        left_Joystick.createButton(Constants.BUTTON_CAPTURE_BALL);
+        left_Joystick.createButton(Constants.BUTTON_RELEASE_BALL);
     }
 }

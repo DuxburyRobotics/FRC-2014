@@ -6,6 +6,7 @@
 
 package edu.duxburyrobotics.subsystems;
 
+import edu.duxburyrobotics.helpers.Constants;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -24,27 +25,14 @@ public class BallCaptureFrame extends Subsystem{
 
     public BallCaptureFrame() {
         _isFrameExtended = false;
-        compressor = new Compressor(1, 1); //TODO: these values need to be changed for actual values
-        leftSolenoid = new DoubleSolenoid(4, 5); //TODO: these values must be verified as well
-        rightSolenoid = new DoubleSolenoid(6, 7); //TODO: same with these        
+        compressor = new Compressor(Constants.COMPRESSOR_PORT_SWITCH, Constants.COMPRESSOR_PORT_SWITCH);
+        leftSolenoid = new DoubleSolenoid(Constants.SOLENOID_PORT_LEFT_FORWARD, Constants.SOLENOID_PORT_LEFT_REVERSE);
+        rightSolenoid = new DoubleSolenoid(Constants.SOLENOID_PORT_RIGHT_FORWARD, Constants.SOLENOID_PORT_RIGHT_REVERSE);
         
         compressor.start();
     }
     
     protected void initDefaultCommand() {}
-    
-    public void update() {
-        /* This shouldn't be handled in this class
-        //if button is clicked
-        if (OI.right_Joystick.getButton(2).get()) {
-            if (_isFrameExtended) {
-                //call command group for rising..
-            } else {
-                //call command group for lowering..
-            }
-        }
-        */
-    }
     
     public void extend() {
         leftSolenoid.set(DoubleSolenoid.Value.kForward);
@@ -63,8 +51,7 @@ public class BallCaptureFrame extends Subsystem{
         rightSolenoid.set(DoubleSolenoid.Value.kOff);
     }
     
-    public boolean isFrameExtended()
-    {
+    public boolean isFrameExtended() {
         return _isFrameExtended;
     }
 }
