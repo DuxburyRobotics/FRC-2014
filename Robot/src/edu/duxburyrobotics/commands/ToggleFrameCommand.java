@@ -39,7 +39,6 @@ public class ToggleFrameCommand extends Command {
     }
 
     protected void interrupted() {
-        System.out.println("ToggleFrameCommand interupted! You're doing something wrong!");
         end();
     }
 }

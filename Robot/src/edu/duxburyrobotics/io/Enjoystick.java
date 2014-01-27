@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  * @author Ben, Evan, (and now Tate harharharharhar)
  * 
- * Creates and init's Joysticks and their buttons
+ * Creates and inits Joysticks and their buttons
  */
 public class Enjoystick {
 
