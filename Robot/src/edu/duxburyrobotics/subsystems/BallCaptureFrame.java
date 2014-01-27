@@ -19,17 +19,17 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class BallCaptureFrame extends Subsystem{
 
     private boolean _isFrameExtended;
-    private final Compressor compressor;
+    //private final Compressor compressor;
     private final DoubleSolenoid leftSolenoid;
     private final DoubleSolenoid rightSolenoid;
 
     public BallCaptureFrame() {
         _isFrameExtended = false;
-        compressor = new Compressor(Constants.COMPRESSOR_PORT_SWITCH, Constants.COMPRESSOR_PORT_SWITCH);
+        //compressor = new Compressor(Constants.COMPRESSOR_PORT_SWITCH, Constants.COMPRESSOR_PORT_SWITCH);
         leftSolenoid = new DoubleSolenoid(Constants.SOLENOID_PORT_LEFT_FORWARD, Constants.SOLENOID_PORT_LEFT_REVERSE);
         rightSolenoid = new DoubleSolenoid(Constants.SOLENOID_PORT_RIGHT_FORWARD, Constants.SOLENOID_PORT_RIGHT_REVERSE);
         
-        compressor.start();
+        //compressor.start();
     }
     
     protected void initDefaultCommand() {}

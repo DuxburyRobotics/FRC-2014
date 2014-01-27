@@ -66,6 +66,8 @@ public class RobotMain extends SimpleRobot {
         drive.setMaxOutput(Constants.DRIVE_MAX_POWER);
         drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
         drive.setInvertedMotor(RobotDrive.MotorType.kRearRight , true);
+        drive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
+        drive.setInvertedMotor(RobotDrive.MotorType.kFrontRight, true);
         //TODO: Invert extra motors if necessary!
    
         drive.setSensitivity(Constants.DRIVE_SENSITIVITY);
