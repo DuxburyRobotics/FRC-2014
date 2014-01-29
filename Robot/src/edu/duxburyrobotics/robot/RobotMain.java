@@ -7,13 +7,11 @@
 
 package edu.duxburyrobotics.robot;
 
-
 import edu.duxburyrobotics.commands.CaptureBallCommand;
 import edu.duxburyrobotics.commands.ToggleFrameCommand;
 import edu.duxburyrobotics.io.OI;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SimpleRobot;
-import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Victor;
 import edu.duxburyrobotics.helpers.Constants;
 import edu.duxburyrobotics.subsystems.BallCaptureMechanism;
@@ -52,7 +50,7 @@ public class RobotMain extends SimpleRobot {
     }
     
     private void initSubsystems() {
-        ballCaptureFrame = new BallCaptureFrame();
+        ballCaptureFrame = new BallCaptureFrame(true);
         ballCaptureMechanism = new BallCaptureMechanism();
     }
     

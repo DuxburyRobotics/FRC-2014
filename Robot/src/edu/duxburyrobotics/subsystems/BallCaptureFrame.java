@@ -9,6 +9,7 @@ package edu.duxburyrobotics.subsystems;
 import edu.duxburyrobotics.helpers.Constants;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -18,37 +19,59 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class BallCaptureFrame extends Subsystem{
 
-    private boolean _isFrameExtended;
-    //private final Compressor compressor;
+    private boolean _isFrameExtended = false;
+    private final Compressor compressor;
     private final DoubleSolenoid leftSolenoid;
-    private final DoubleSolenoid rightSolenoid;
+    private DoubleSolenoid rightSolenoid = null;
+    private boolean usesSingleSolenoid = false;
 
-    public BallCaptureFrame() {
-        _isFrameExtended = false;
-        //compressor = new Compressor(Constants.COMPRESSOR_PORT_SWITCH, Constants.COMPRESSOR_PORT_SWITCH);
-        leftSolenoid = new DoubleSolenoid(Constants.SOLENOID_PORT_LEFT_FORWARD, Constants.SOLENOID_PORT_LEFT_REVERSE);
-        rightSolenoid = new DoubleSolenoid(Constants.SOLENOID_PORT_RIGHT_FORWARD, Constants.SOLENOID_PORT_RIGHT_REVERSE);
+    /**
+     * @param sc Whether or not a single solenoid will be used
+     */
+    public BallCaptureFrame(final boolean sc) {
+        usesSingleSolenoid = sc;
+        compressor = new Compressor(Constants.COMPRESSOR_PORT_SWITCH, Constants.COMPRESSOR_PORT_SWITCH);
         
-        //compressor.start();
+        leftSolenoid = new DoubleSolenoid(Constants.SOLENOID_PORT_LEFT_FORWARD, Constants.SOLENOID_PORT_LEFT_REVERSE);
+        if (!usesSingleSolenoid)
+            rightSolenoid = new DoubleSolenoid(Constants.SOLENOID_PORT_RIGHT_FORWARD, Constants.SOLENOID_PORT_RIGHT_REVERSE);
+        
+        compressor.start();
     }
     
     protected void initDefaultCommand() {}
     
     public void extend() {
-        leftSolenoid.set(DoubleSolenoid.Value.kForward);
-        rightSolenoid.set(DoubleSolenoid.Value.kForward);
+        //leftSolenoid.set(DoubleSolenoid.Value.kForward);
+        //rightSolenoid.set(DoubleSolenoid.Value.kForward);
+        
+        setSolenoids(Value.kForward);
         _isFrameExtended = false;
     }
     
     public void retract() {
-        leftSolenoid.set(DoubleSolenoid.Value.kReverse);
-        rightSolenoid.set(DoubleSolenoid.Value.kReverse);        
+        //leftSolenoid.set(DoubleSolenoid.Value.kReverse);
+        //rightSolenoid.set(DoubleSolenoid.Value.kReverse);
+        
+        setSolenoids(Value.kReverse);
         _isFrameExtended = true;
     }
     
     public void stopMoving() {
-        leftSolenoid.set(DoubleSolenoid.Value.kOff);
-        rightSolenoid.set(DoubleSolenoid.Value.kOff);
+        //leftSolenoid.set(DoubleSolenoid.Value.kOff);
+        //rightSolenoid.set(DoubleSolenoid.Value.kOff);
+        
+        setSolenoids(Value.kOff);
+    }
+    
+    private void setSolenoids(Value val) {
+        leftSolenoid.set(val);
+        if (!usingSingleSolenoid())
+            rightSolenoid.set(val);
+    }
+    
+    public boolean usingSingleSolenoid() {
+        return usesSingleSolenoid || rightSolenoid == null;
     }
     
     public boolean isFrameExtended() {
