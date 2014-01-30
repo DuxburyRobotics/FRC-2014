@@ -10,6 +10,7 @@ import edu.duxburyrobotics.helpers.Constants;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -21,8 +22,12 @@ public class BallCaptureFrame extends Subsystem{
 
     private boolean _isFrameExtended = false;
     private final Compressor compressor;
+    private final Relay solenoidController;
+    
+    /*
     private final DoubleSolenoid leftSolenoid;
     private DoubleSolenoid rightSolenoid = null;
+    */
     private boolean usesSingleSolenoid = false;
 
     /**
@@ -32,10 +37,14 @@ public class BallCaptureFrame extends Subsystem{
         usesSingleSolenoid = sc;
         compressor = new Compressor(Constants.COMPRESSOR_PORT_SWITCH, Constants.COMPRESSOR_PORT_SWITCH);
         
+        solenoidController = new Relay(3, 1, Relay.Direction.kBoth);
+        
+        /*
         leftSolenoid = new DoubleSolenoid(Constants.SOLENOID_PORT_LEFT_FORWARD, Constants.SOLENOID_PORT_LEFT_REVERSE);
         if (!usesSingleSolenoid)
             rightSolenoid = new DoubleSolenoid(Constants.SOLENOID_PORT_RIGHT_FORWARD, Constants.SOLENOID_PORT_RIGHT_REVERSE);
-        
+        */
+                
         compressor.start();
     }
     
@@ -45,7 +54,9 @@ public class BallCaptureFrame extends Subsystem{
         //leftSolenoid.set(DoubleSolenoid.Value.kForward);
         //rightSolenoid.set(DoubleSolenoid.Value.kForward);
         
-        setSolenoids(Value.kForward);
+        //setSolenoids(Value.kForward);
+        
+        setRelay(Relay.Value.kForward);
         _isFrameExtended = false;
     }
     
@@ -53,7 +64,9 @@ public class BallCaptureFrame extends Subsystem{
         //leftSolenoid.set(DoubleSolenoid.Value.kReverse);
         //rightSolenoid.set(DoubleSolenoid.Value.kReverse);
         
-        setSolenoids(Value.kReverse);
+        //setSolenoids(Value.kReverse);
+        
+        setRelay(Relay.Value.kReverse);
         _isFrameExtended = true;
     }
     
@@ -61,17 +74,25 @@ public class BallCaptureFrame extends Subsystem{
         //leftSolenoid.set(DoubleSolenoid.Value.kOff);
         //rightSolenoid.set(DoubleSolenoid.Value.kOff);
         
-        setSolenoids(Value.kOff);
+        //setSolenoids(Value.kOff);
+        
+        setRelay(Relay.Value.kOff);
+    }
+    
+    private void setRelay(Relay.Value val) {
+        solenoidController.set(val);
     }
     
     private void setSolenoids(Value val) {
+        /*
         leftSolenoid.set(val);
         if (!usingSingleSolenoid())
             rightSolenoid.set(val);
+        */
     }
     
     public boolean usingSingleSolenoid() {
-        return usesSingleSolenoid || rightSolenoid == null;
+        return usesSingleSolenoid;
     }
     
     public boolean isFrameExtended() {

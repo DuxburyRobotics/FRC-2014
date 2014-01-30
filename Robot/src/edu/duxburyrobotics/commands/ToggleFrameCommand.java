@@ -16,9 +16,12 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ToggleFrameCommand extends Command {
     
     private boolean startingState;
+    
+    public ToggleFrameCommand() {
+        requires(RobotMain.ballCaptureFrame);
+    }
 
     protected void initialize() {
-        requires(RobotMain.ballCaptureFrame);
         startingState = RobotMain.ballCaptureFrame.isFrameExtended();
     }
 
