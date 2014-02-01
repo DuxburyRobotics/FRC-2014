@@ -6,6 +6,7 @@
 
 package edu.duxburyrobotics.commands;
 
+import edu.duxburyrobotics.helpers.Constants;
 import edu.duxburyrobotics.robot.RobotMain;
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -14,9 +15,17 @@ import edu.wpi.first.wpilibj.command.Command;
  * @author Evan
  */
 public class RetractFrameCommand extends Command{
+    
+    public RetractFrameCommand(){
+        //  the subsystem it requires
+        requires(RobotMain.ballCaptureFrame);
+        
+        //  we may need to adjust this value as appropriate, or it may work
+        setTimeout(Constants.ARM_MOVE_TIMEOUT);
+    }
 
     protected void initialize() {
-        requires(RobotMain.ballCaptureFrame);
+       
     }
 
     protected void execute() {
@@ -24,7 +33,7 @@ public class RetractFrameCommand extends Command{
     }
 
     protected boolean isFinished() {
-        return false;
+        return isFinished();
     }
 
     protected void end() {

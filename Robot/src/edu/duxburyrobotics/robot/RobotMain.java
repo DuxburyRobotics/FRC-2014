@@ -45,6 +45,7 @@ public class RobotMain extends SimpleRobot {
          OI.init();
          
          //The following joystick buttons need to be changed
+         
          OI.left_Joystick.getButton(Constants.BUTTON_CAPTURE_BALL).whileHeld(new CaptureBallCommand());
          OI.right_Joystick.getButton(Constants.BUTTON_TOGGLE_FRAME).whenPressed(new ToggleFrameCommand());
     }

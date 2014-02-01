@@ -7,6 +7,7 @@
 package edu.duxburyrobotics.subsystems;
 
 import edu.duxburyrobotics.helpers.Constants;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
@@ -23,6 +24,25 @@ public class BallCaptureMechanism extends Subsystem {
     }
 
     protected void initDefaultCommand() {}
+    
+    /**
+     * @param joystick the Joystick object that will control
+     * the spinner on top. works off its Y axis
+     */
+    public void spinController(Joystick joystick){
+        //the Y value of the stick
+        double y = joystick.getY();
+        
+        //reduce the y value to 1/4 its value in order to keep it slow.
+        y /= 5;
+        
+        //move the mechinism by that value
+        moveBallMechinism(y);
+    }
+    
+    public void moveBallMechinism(double moveValue){
+        captureMotorController.set(moveValue);
+    }
     
     public void captureBall() {
         captureMotorController.set(1.0);

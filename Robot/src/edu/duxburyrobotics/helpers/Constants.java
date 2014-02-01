@@ -38,4 +38,7 @@ public class Constants {
     public static final int BUTTON_CAPTURE_BALL = 1;
     public static final int BUTTON_RELEASE_BALL = 2;
     public static final int BUTTON_TOGGLE_FRAME = 3;
+    
+    /*  Timeout for the lifting and lowering of arms    */
+    public static final double ARM_MOVE_TIMEOUT = 0.5;
 }

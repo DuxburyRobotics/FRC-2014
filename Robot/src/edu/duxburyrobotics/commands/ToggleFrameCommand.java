@@ -6,6 +6,8 @@
 
 package edu.duxburyrobotics.commands;
 
+import edu.duxburyrobotics.helpers.Constants;
+import edu.duxburyrobotics.io.OI;
 import edu.duxburyrobotics.robot.RobotMain;
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -19,22 +21,27 @@ public class ToggleFrameCommand extends Command {
     
     public ToggleFrameCommand() {
         requires(RobotMain.ballCaptureFrame);
+        setTimeout(Constants.ARM_MOVE_TIMEOUT);
     }
 
     protected void initialize() {
         startingState = RobotMain.ballCaptureFrame.isFrameExtended();
     }
 
-    protected void execute() {
+    protected void execute() {         
+      
         if (RobotMain.ballCaptureFrame.isFrameExtended())
             RobotMain.ballCaptureFrame.retract();
         else
             RobotMain.ballCaptureFrame.extend();
+        
     }
 
     protected boolean isFinished() {
         //Some timing may need to be implemented depending on how nice things are for us
-        return startingState != RobotMain.ballCaptureFrame.isFrameExtended();
+       // return startingState != RobotMain.ballCaptureFrame.isFrameExtended();
+        return isTimedOut();
+       
     }
 
     protected void end() {

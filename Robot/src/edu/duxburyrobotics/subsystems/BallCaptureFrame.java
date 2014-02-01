@@ -6,6 +6,7 @@
 
 package edu.duxburyrobotics.subsystems;
 
+import edu.duxburyrobotics.commands.ToggleFrameCommand;
 import edu.duxburyrobotics.helpers.Constants;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -39,6 +40,9 @@ public class BallCaptureFrame extends Subsystem{
         
         solenoidController = new Relay(3, 1, Relay.Direction.kBoth);
         
+        //set the default frame to the toggle
+        setDefaultCommand(new ToggleFrameCommand());
+        
         /*
         leftSolenoid = new DoubleSolenoid(Constants.SOLENOID_PORT_LEFT_FORWARD, Constants.SOLENOID_PORT_LEFT_REVERSE);
         if (!usesSingleSolenoid)
@@ -71,11 +75,7 @@ public class BallCaptureFrame extends Subsystem{
     }
     
     public void stopMoving() {
-        //leftSolenoid.set(DoubleSolenoid.Value.kOff);
-        //rightSolenoid.set(DoubleSolenoid.Value.kOff);
-        
-        //setSolenoids(Value.kOff);
-        
+       
         setRelay(Relay.Value.kOff);
     }
     

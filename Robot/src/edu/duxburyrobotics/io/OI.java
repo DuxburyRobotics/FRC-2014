@@ -1,6 +1,7 @@
 
 package edu.duxburyrobotics.io;
 
+import edu.duxburyrobotics.commands.ToggleFrameCommand;
 import edu.duxburyrobotics.helpers.Constants;
 import edu.wpi.first.wpilibj.Joystick;
 
@@ -37,5 +38,6 @@ public class OI {
         left_Joystick = new Enjoystick(new Joystick(leftJoystickInputValue));
         left_Joystick.createButton(Constants.BUTTON_CAPTURE_BALL);
         left_Joystick.createButton(Constants.BUTTON_RELEASE_BALL);
+        left_Joystick.createButton(Constants.BUTTON_TOGGLE_FRAME, 0 , new ToggleFrameCommand(), 0);
     }
 }

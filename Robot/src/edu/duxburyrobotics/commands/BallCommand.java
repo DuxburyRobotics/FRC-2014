@@ -6,37 +6,38 @@
 
 package edu.duxburyrobotics.commands;
 
-import edu.duxburyrobotics.helpers.Constants;
+import edu.duxburyrobotics.io.OI;
 import edu.duxburyrobotics.robot.RobotMain;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  * @author Evan
+ * 
+ * This command will just operate the spinner based off the 
+ * Y axis of the Left JoyStick
  */
-public class ExtendFrameCommand extends Command{
+public class BallCommand extends Command{
     
-    public ExtendFrameCommand(){
-        requires(RobotMain.ballCaptureFrame);
+    public void BallCommand(){
+        requires(RobotMain.ballCaptureMechanism);
         
-        //set timeout may need to adjust
-        setTimeout(Constants.ARM_MOVE_TIMEOUT);
     }
-    
+
     protected void initialize() {
-        
     }
 
     protected void execute() {
-        RobotMain.ballCaptureFrame.extend();
+        
+        RobotMain.ballCaptureMechanism.spinController(OI.left_Joystick.getJoystick());
     }
 
     protected boolean isFinished() {
-        return isTimedOut();
+        return false; // we want this to never return true.
     }
 
     protected void end() {
-        RobotMain.ballCaptureFrame.stopMoving();
+        RobotMain.ballCaptureMechanism.stopCapturing();
     }
 
     protected void interrupted() {
