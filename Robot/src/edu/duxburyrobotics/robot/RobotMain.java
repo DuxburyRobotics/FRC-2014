@@ -51,7 +51,7 @@ public class RobotMain extends SimpleRobot {
     }
     
     private void initSubsystems() {
-        ballCaptureFrame = new BallCaptureFrame(true);
+        ballCaptureFrame = new BallCaptureFrame();
         ballCaptureMechanism = new BallCaptureMechanism();
     }
     

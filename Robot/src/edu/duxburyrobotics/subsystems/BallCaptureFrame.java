@@ -11,7 +11,6 @@ import edu.duxburyrobotics.helpers.Constants;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
-import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -21,33 +20,17 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class BallCaptureFrame extends Subsystem{
 
-    private boolean _isFrameExtended = false;
+    private boolean _isFrameExtended;
     private final Compressor compressor;
-    private final Relay solenoidController;
-    
-    /*
-    private final DoubleSolenoid leftSolenoid;
-    private DoubleSolenoid rightSolenoid = null;
-    */
-    private boolean usesSingleSolenoid = false;
+    private final DoubleSolenoid dasSolenoid;
 
-    /**
-     * @param sc Whether or not a single solenoid will be used
-     */
-    public BallCaptureFrame(final boolean sc) {
-        usesSingleSolenoid = sc;
-        compressor = new Compressor(Constants.COMPRESSOR_PORT_SWITCH, Constants.COMPRESSOR_PORT_SWITCH);
-        
-        solenoidController = new Relay(3, 1, Relay.Direction.kBoth);
+    public BallCaptureFrame() {
+        _isFrameExtended = false;
+        compressor = new Compressor(Constants.COMPRESSOR_PORT_SWITCH, Constants.COMPRESSOR_PORT_RELAY);
+        dasSolenoid = new DoubleSolenoid(Constants.SOLENOID_PORT_FORWARD, Constants.SOLENOID_PORT_REVERSE);
         
         //set the default frame to the toggle
         setDefaultCommand(new ToggleFrameCommand());
-        
-        /*
-        leftSolenoid = new DoubleSolenoid(Constants.SOLENOID_PORT_LEFT_FORWARD, Constants.SOLENOID_PORT_LEFT_REVERSE);
-        if (!usesSingleSolenoid)
-            rightSolenoid = new DoubleSolenoid(Constants.SOLENOID_PORT_RIGHT_FORWARD, Constants.SOLENOID_PORT_RIGHT_REVERSE);
-        */
                 
         compressor.start();
     }
@@ -55,44 +38,13 @@ public class BallCaptureFrame extends Subsystem{
     protected void initDefaultCommand() {}
     
     public void extend() {
-        //leftSolenoid.set(DoubleSolenoid.Value.kForward);
-        //rightSolenoid.set(DoubleSolenoid.Value.kForward);
-        
-        //setSolenoids(Value.kForward);
-        
-        setRelay(Relay.Value.kForward);
-        _isFrameExtended = false;
-    }
-    
-    public void retract() {
-        //leftSolenoid.set(DoubleSolenoid.Value.kReverse);
-        //rightSolenoid.set(DoubleSolenoid.Value.kReverse);
-        
-        //setSolenoids(Value.kReverse);
-        
-        setRelay(Relay.Value.kReverse);
+        dasSolenoid.set(Value.kForward);
         _isFrameExtended = true;
     }
     
-    public void stopMoving() {
-       
-        setRelay(Relay.Value.kOff);
-    }
-    
-    private void setRelay(Relay.Value val) {
-        solenoidController.set(val);
-    }
-    
-    private void setSolenoids(Value val) {
-        /*
-        leftSolenoid.set(val);
-        if (!usingSingleSolenoid())
-            rightSolenoid.set(val);
-        */
-    }
-    
-    public boolean usingSingleSolenoid() {
-        return usesSingleSolenoid;
+    public void retract() {
+        dasSolenoid.set(Value.kReverse);
+        _isFrameExtended = false;
     }
     
     public boolean isFrameExtended() {

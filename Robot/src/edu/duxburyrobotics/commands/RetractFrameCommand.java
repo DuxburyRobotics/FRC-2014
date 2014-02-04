@@ -37,7 +37,7 @@ public class RetractFrameCommand extends Command{
     }
 
     protected void end() {
-        RobotMain.ballCaptureFrame.stopMoving();
+        
     }
 
     protected void interrupted() {

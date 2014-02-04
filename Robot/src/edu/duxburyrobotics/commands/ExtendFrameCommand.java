@@ -36,7 +36,7 @@ public class ExtendFrameCommand extends Command{
     }
 
     protected void end() {
-        RobotMain.ballCaptureFrame.stopMoving();
+        
     }
 
     protected void interrupted() {

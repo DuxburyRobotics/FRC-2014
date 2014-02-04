@@ -17,13 +17,10 @@ public class Constants {
     public static final int MOTOR_PORT_RIGHT2 = 3;
     public static final int MOTOR_PORT_LEFT2 = 4;
     public static final int MOTOR_PORT_CAPTURE = 5;
-    public static final int SOLENOID_PORT = 1;
-    //public static final int SOLENOID_PORT_RIGHT_FORWARD = 1;
-    //public static final int SOLENOID_PORT_RIGHT_REVERSE = 2;
-    //public static final int SOLENOID_PORT_LEFT_FORWARD = 3;
-    //public static final int SOLENOID_PORT_LEFT_REVERSE = 4;
-    public static final int COMPRESSOR_PORT_SWITCH = 1;
-    public static final int COMPRESSOR_PORT_RELAY = 2;
+    public static final int SOLENOID_PORT_FORWARD = 1;
+    public static final int SOLENOID_PORT_REVERSE = 2;
+    public static final int COMPRESSOR_PORT_SWITCH = 1; //Digital IO ports
+    public static final int COMPRESSOR_PORT_RELAY = 1;  //Relay ports
     public static final int DETECTOR_PORT = 5;
     
     /* DriveTrain constants */
