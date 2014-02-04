@@ -17,31 +17,25 @@ import edu.wpi.first.wpilibj.command.Command;
  * This command will just operate the spinner based off the 
  * Y axis of the Left JoyStick
  */
-public class BallCommand extends Command{
+public class ManipulateBallCommand extends Command {
     
     public void BallCommand(){
         requires(RobotMain.ballCaptureMechanism);
-        
     }
 
-    protected void initialize() {
-    }
+    protected void initialize() {}
 
     protected void execute() {
-        
-        RobotMain.ballCaptureMechanism.spinController(OI.left_Joystick.getJoystick());
+        RobotMain.ballCaptureMechanism.spinController(OI.left_Joystick.getJoystick().getY());
     }
 
     protected boolean isFinished() {
-        return false; // we want this to never return true.
+        return false;
     }
 
-    protected void end() {
-        RobotMain.ballCaptureMechanism.stopCapturing();
-    }
+    protected void end() {}
 
     protected void interrupted() {
         end();
     }
-    
 }

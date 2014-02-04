@@ -7,10 +7,9 @@
 
 package edu.duxburyrobotics.robot;
 
-import edu.duxburyrobotics.commands.CaptureBallCommand;
+import edu.duxburyrobotics.commands.ManipulateBallCommand;
 import edu.duxburyrobotics.commands.ToggleFrameCommand;
 import edu.duxburyrobotics.io.OI;
-import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SimpleRobot;
 import edu.wpi.first.wpilibj.Victor;
 import edu.duxburyrobotics.helpers.Constants;
@@ -43,8 +42,7 @@ public class RobotMain extends SimpleRobot {
     
     private void initOI() {
          OI.init();
-                  
-         OI.left_Joystick.getButton(Constants.BUTTON_CAPTURE_BALL).whileHeld(new CaptureBallCommand());
+         OI.left_Joystick.getButton(Constants.BUTTON_CAPTURE_BALL).whileHeld(new ManipulateBallCommand());
          OI.right_Joystick.getButton(Constants.BUTTON_TOGGLE_FRAME).whenPressed(new ToggleFrameCommand());
     }
     

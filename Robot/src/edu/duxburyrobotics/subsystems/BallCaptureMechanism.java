@@ -26,37 +26,14 @@ public class BallCaptureMechanism extends Subsystem {
     protected void initDefaultCommand() {}
     
     /**
-     * @param joystick the Joystick object that will control
-     * the spinner on top. works off its Y axis
+     * @param value 
      */
-    public void spinController(Joystick joystick){
-        //the Y value of the stick
-        double y = joystick.getY();
-        
-        //reduce the y value to 1/4 its value in order to keep it slow.
-        y /= 5;
-        
-        //move the mechinism by that value
-        moveBallMechinism(y);
+    public void spinController(final double value){
+        double power = value * 0.25;
+        moveCaptureMotor(power);
     }
     
-    public void moveBallMechinism(double moveValue){
+    public void moveCaptureMotor(final double moveValue){
         captureMotorController.set(moveValue);
-    }
-    
-    public void captureBall() {
-        captureMotorController.set(1.0);
-        //Perhaps gradually accelerate speed of motor to make more
-        //efficient and less damaging to parts.
-    }
-    
-    public void releaseBall() {
-        captureMotorController.set(-1.0);
-    }
-    
-    public void stopCapturing() {
-        captureMotorController.set(0.0);
-        captureMotorController.stopMotor();
-        //Perhaps use PID controller to quickly stop the motor
     }
 }
