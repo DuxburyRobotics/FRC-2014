@@ -17,16 +17,25 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ToggleFrameCommand extends Command {
     
     private boolean didExecute;
+    private boolean goUp;
         
     public ToggleFrameCommand() {
         didExecute = false;
+        goUp = false;
         requires(RobotMain.ballCaptureFrame);
         setTimeout(Constants.ARM_MOVE_TIMEOUT);
     }
 
-    protected void initialize() {}
+    protected void initialize() {
+        if (RobotMain.ballCaptureFrame.isFrameExtended()){
+            goUp = true;
+        }else{
+            goUp = false;
+        }
+    }
 
     protected void execute() {  
+        /*
         if (!didExecute) {
             if (RobotMain.ballCaptureFrame.isFrameExtended())
                 RobotMain.ballCaptureFrame.retract();
@@ -34,6 +43,12 @@ public class ToggleFrameCommand extends Command {
                 RobotMain.ballCaptureFrame.extend();
             
             didExecute = true;
+        }
+         */
+        if (goUp){
+            RobotMain.ballCaptureFrame.retract();
+        }else if (!goUp){
+            RobotMain.ballCaptureFrame.extend();
         }
     }
 

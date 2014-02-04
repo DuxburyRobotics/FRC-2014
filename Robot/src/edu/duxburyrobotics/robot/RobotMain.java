@@ -43,7 +43,9 @@ public class RobotMain extends SimpleRobot {
     private void initOI() {
          OI.init();
          OI.left_Joystick.getButton(Constants.BUTTON_CAPTURE_BALL).whileHeld(new ManipulateBallCommand());
-         OI.right_Joystick.getButton(Constants.BUTTON_TOGGLE_FRAME).whenPressed(new ToggleFrameCommand());
+         
+         // Left joystick will be for top mechanism. that why this left now.
+         OI.left_Joystick.getButton(Constants.BUTTON_TOGGLE_FRAME).whenPressed(new ToggleFrameCommand());
     }
     
     private void initSubsystems() {
