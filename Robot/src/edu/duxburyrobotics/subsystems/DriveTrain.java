@@ -24,12 +24,6 @@ public class DriveTrain extends RobotDrive{
         super(frontLeftMotor, rearLeftMotor, frontRightMotor, rearRightMotor);
     }
     
-    /*
-    public DriveTrain(SpeedController leftMotor, SpeedController rightMotor) {
-        super(leftMotor, rightMotor);
-    }
-    */
-    
     /**
      * This method should use the twist value of the joystick for turning
      * and use the throttle to control it's speed.
@@ -45,8 +39,8 @@ public class DriveTrain extends RobotDrive{
             newData =  (((throttleData) * (1.0 - Constants.DRIVE_MIN_POWER)) / 1.0) + Constants.DRIVE_MIN_POWER; //Don't touch, magic ahead.
         }
         
-        double driveSpeed = stick.getY() * newData;
-        double turnSpeed = stick.getTwist() * newData * Constants.DRIVE_TURN_MULTIPLIER;
+        double driveSpeed = stick.getY() * newData * -1.0;
+        double turnSpeed = stick.getTwist() * newData * Constants.DRIVE_TURN_MULTIPLIER * -1.0;
         
         this.arcadeDrive(driveSpeed, turnSpeed);
     }

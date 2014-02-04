@@ -43,9 +43,7 @@ public class RobotMain extends SimpleRobot {
     
     private void initOI() {
          OI.init();
-         
-         //The following joystick buttons need to be changed
-         
+                  
          OI.left_Joystick.getButton(Constants.BUTTON_CAPTURE_BALL).whileHeld(new CaptureBallCommand());
          OI.right_Joystick.getButton(Constants.BUTTON_TOGGLE_FRAME).whenPressed(new ToggleFrameCommand());
     }
@@ -55,7 +53,8 @@ public class RobotMain extends SimpleRobot {
         ballCaptureMechanism = new BallCaptureMechanism();
     }
     
-    private void initDriveTrain() {        
+    private void initDriveTrain() {
+        //TODO: These need to be changed to match physical setup!
         Jaguar rightMotor1 = new Jaguar(1, Constants.MOTOR_PORT_RIGHT1);
         Jaguar leftMotor1 = new Jaguar(1, Constants.MOTOR_PORT_LEFT1);
         Victor rightMotor2 = new Victor(1, Constants.MOTOR_PORT_RIGHT2);
@@ -63,11 +62,6 @@ public class RobotMain extends SimpleRobot {
         
         drive = new DriveTrain(leftMotor1, leftMotor2, rightMotor1, rightMotor2);
         drive.setMaxOutput(Constants.DRIVE_MAX_POWER);
-        drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
-        drive.setInvertedMotor(RobotDrive.MotorType.kRearRight , true);
-        drive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
-        drive.setInvertedMotor(RobotDrive.MotorType.kFrontRight, true);
-        //TODO: Invert extra motors if necessary!
    
         drive.setSensitivity(Constants.DRIVE_SENSITIVITY);
     }
@@ -78,21 +72,6 @@ public class RobotMain extends SimpleRobot {
     public void autonomous() {
         System.out.println("Autonomous Mode Enabled");
         
-        /* Old auto driving
-        drive.setSafetyEnabled(false);
-        for (int i = 0; i < 1000; i++)
-            drive.autonomousDrive(1.0);
-        */
-        /*
-        Test for possibly better autonomous driving
-        This makes it time based instead of iteration based.
-        Better because our variable is a constant time, not 
-        iterations which may change slightly depending on
-        conditions in the CPU
-        */
-        
-        //This drives exactly 10 feet (including drift) with the bumpers
-        //attached
         drive.setSafetyEnabled(false);
         drive.autonomousDrive(0.75);
         Timer.delay(2.5);
