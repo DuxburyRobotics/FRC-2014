@@ -20,16 +20,15 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 public class BallCaptureFrame extends Subsystem{
 
-    private boolean _isFrameExtended;
+    private boolean frameExtended;
     private final Compressor compressor;
     private final DoubleSolenoid dasSolenoid;
 
     public BallCaptureFrame() {
-        _isFrameExtended = false;
+        frameExtended = false;
         compressor = new Compressor(Constants.COMPRESSOR_PORT_SWITCH, Constants.COMPRESSOR_PORT_RELAY);
         dasSolenoid = new DoubleSolenoid(Constants.SOLENOID_PORT_FORWARD, Constants.SOLENOID_PORT_REVERSE);
         
-        //set the default frame to the toggle
         setDefaultCommand(new ToggleFrameCommand());
                 
         compressor.start();
@@ -39,15 +38,15 @@ public class BallCaptureFrame extends Subsystem{
     
     public void extend() {
         dasSolenoid.set(Value.kForward);
-        _isFrameExtended = true;
+        frameExtended = true;
     }
     
     public void retract() {
         dasSolenoid.set(Value.kReverse);
-        _isFrameExtended = false;
+        frameExtended = false;
     }
     
     public boolean isFrameExtended() {
-        return _isFrameExtended;
+        return frameExtended;
     }
 }

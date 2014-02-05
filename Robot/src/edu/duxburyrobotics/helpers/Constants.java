@@ -11,6 +11,11 @@ package edu.duxburyrobotics.helpers;
  * @author Tate
  */
 public class Constants {
+    /* Button command constants */
+    public static final int ACTION_PRESSED = 0;
+    public static final int ACTION_RELEASED = 1;
+    public static final int ACTION_HELD = 2;
+    
     /* Device channels/ports */
     public static final int MOTOR_PORT_RIGHT1 = 1;
     public static final int MOTOR_PORT_LEFT1 = 2;

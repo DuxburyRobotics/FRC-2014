@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
- * @author Evan
+ * @author Evan, Tate
  * 
  * This command will just operate the spinner based off the 
  * Y axis of the Left JoyStick

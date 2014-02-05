@@ -1,5 +1,6 @@
 package edu.duxburyrobotics.io;
 
+import edu.duxburyrobotics.helpers.Constants;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.command.Command;
@@ -8,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  * @author Ben, Evan, (and now Tate harharharharhar)
  * 
- * Creates and inits Joysticks and their buttons
+ * Creates and initializes Joysticks and their buttons
  */
 public class Enjoystick {
 
@@ -17,10 +18,9 @@ public class Enjoystick {
     private final Joystick joystick;
     private final JoystickButton[] buttons;
     
-    public Enjoystick(Joystick joystick){
+    public Enjoystick(final Joystick joystick){
         this.joystick = joystick;
         buttons = new JoystickButton[amountOfButtons];
-        //buttons = new Hashtable();
     }
     
     public Joystick getJoystick(){
@@ -32,7 +32,7 @@ public class Enjoystick {
      * @param pos the position of the button 0 - (amountOfButtons - 1)
      * @return JoystickButton at the position requested
      */
-    public JoystickButton getButton(int pos)
+    public JoystickButton getButton(final int pos)
     {
         if(buttons[pos] == null) {
             /*
@@ -42,7 +42,6 @@ public class Enjoystick {
             
             //If button is null, inform us, but create it and return it.
             //Buttons should still be created before hand as an optimization!
-            
             System.err.println("Button[" + pos + "] is null, creating now!");
             System.err.println("Button should be preloaded!");
             
@@ -58,25 +57,24 @@ public class Enjoystick {
      * @param option -int 0 = whenPressed, 1 = whenReleased, 2 = whileHeld, default whileHeld
      * @param pos - defines where the button is stored in the internal array
      */
-    public void createButton(int buttonNumber, int pos, Command command, int option){
+    public void createButton(final int buttonNumber, final int pos, final Command command, final int option){
         JoystickButton jb = new JoystickButton(joystick, buttonNumber);
         
         //assign the command to the button with appropriate action listener
-        switch (option)
-        {
-            case 0:
+        switch (option) {
+            case Constants.ACTION_PRESSED:
                 jb.whenPressed(command);
                 break;
-            case 1:
+            case Constants.ACTION_RELEASED:
                 jb.whenReleased(command);
                 break;
-            case 2:
+            case Constants.ACTION_HELD:
                 jb.whileHeld(command);
                 break;
             default:
                 jb.whileHeld(command);
-                break;
         }
+        
         checkCreation(pos);
         buttons[pos] = jb;
     }

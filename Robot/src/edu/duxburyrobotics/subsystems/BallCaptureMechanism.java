@@ -7,7 +7,6 @@
 package edu.duxburyrobotics.subsystems;
 
 import edu.duxburyrobotics.helpers.Constants;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 

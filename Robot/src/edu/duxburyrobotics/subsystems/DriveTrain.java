@@ -47,12 +47,13 @@ public class DriveTrain extends RobotDrive{
     
     /**
      * This method should be called to drive if the user wants the choice
-     * between twist turning and x-axis turning. x-axis turning sucks, so 
+     * between twist turning and x-axis turning. x-axis turning sucks and Piers 
+     * is a silly goose that doesn't know what he's talking about, so 
      * hopefully this is just for debug...
      */
     public void driveDebug(){
         if (OI.right_Joystick.getButton(2).get())       
-            arcadeDrive(OI.right_Joystick.getJoystick()); //TODO: Implement throttle control
+            arcadeDrive(OI.right_Joystick.getJoystick());
         else
             twistThrottleDrive(OI.right_Joystick.getJoystick(), OI.right_Joystick.getButton(1).get());
     }

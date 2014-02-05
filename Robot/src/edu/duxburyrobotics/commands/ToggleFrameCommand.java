@@ -6,36 +6,43 @@
 
 package edu.duxburyrobotics.commands;
 
-import edu.duxburyrobotics.helpers.Constants;
 import edu.duxburyrobotics.robot.RobotMain;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
  * @author Tate
  */
 public class ToggleFrameCommand extends Command {
     
+    /**
+     * IMPORTENT
+     * 
+     * We decided in school that this implementation would probably work,
+     * so I put the code that I entered back. I left the other stuff as 
+     * comments in case it doesn't work though.
+     */
+    
     private boolean didExecute;
-    private boolean goUp;
+    //private boolean goUp;
         
     public ToggleFrameCommand() {
         didExecute = false;
-        goUp = false;
+        //goUp = false;
         requires(RobotMain.ballCaptureFrame);
-        setTimeout(Constants.ARM_MOVE_TIMEOUT);
+        //setTimeout(Constants.ARM_MOVE_TIMEOUT);
     }
 
     protected void initialize() {
+        /*
         if (RobotMain.ballCaptureFrame.isFrameExtended()){
             goUp = true;
         }else{
             goUp = false;
         }
+        */
     }
 
     protected void execute() {  
-        /*
         if (!didExecute) {
             if (RobotMain.ballCaptureFrame.isFrameExtended())
                 RobotMain.ballCaptureFrame.retract();
@@ -44,17 +51,19 @@ public class ToggleFrameCommand extends Command {
             
             didExecute = true;
         }
-         */
+        
+        /*
         if (goUp){
             RobotMain.ballCaptureFrame.retract();
         }else if (!goUp){
             RobotMain.ballCaptureFrame.extend();
         }
+        */
     }
 
-    protected boolean isFinished() {
-        //Some timing may need to be implemented depending on how nice things are for us
-        return isTimedOut();
+    protected boolean isFinished() {        
+        //return isTimedOut();
+        return didExecute;
     }
 
     protected void end() {
