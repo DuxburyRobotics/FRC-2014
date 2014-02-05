@@ -25,14 +25,12 @@ public class BallCaptureMechanism extends Subsystem {
     protected void initDefaultCommand() {}
     
     /**
-     * @param value 
+     * Decreases raw value to 1/4 before passing it to motor
+     * 
+     * @param value - Raw value in the range of -1.0 to 1.0
      */
     public void spinController(final double value){
         double power = value * 0.25;
-        moveCaptureMotor(power);
-    }
-    
-    public void moveCaptureMotor(final double moveValue){
-        captureMotorController.set(moveValue);
+        captureMotorController.set(power);
     }
 }

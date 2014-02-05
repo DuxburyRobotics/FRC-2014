@@ -40,6 +40,9 @@ public class RobotMain extends SimpleRobot {
         initDriveTrain();
     }
     
+    /**
+     * Initializes OI class as well as any input devices
+     */
     private void initOI() {
          OI.init();
          OI.left_Joystick.getButton(Constants.BUTTON_CAPTURE_BALL).whileHeld(new ManipulateBallCommand());
@@ -48,11 +51,17 @@ public class RobotMain extends SimpleRobot {
          OI.left_Joystick.getButton(Constants.BUTTON_TOGGLE_FRAME).whenPressed(new ToggleFrameCommand());
     }
     
+    /**
+     * Initializes all subsystems of robot
+     */
     private void initSubsystems() {
         ballCaptureFrame = new BallCaptureFrame();
         ballCaptureMechanism = new BallCaptureMechanism();
     }
     
+    /**
+     * Initializes the drive train of the robot
+     */
     private void initDriveTrain() {
         //TODO: These need to be changed to match physical setup!
         Jaguar rightMotor1 = new Jaguar(1, Constants.MOTOR_PORT_RIGHT1);

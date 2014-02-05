@@ -36,16 +36,27 @@ public class BallCaptureFrame extends Subsystem{
     
     protected void initDefaultCommand() {}
     
+    /**
+     * Extends the pneumatic pistons
+     */
     public void extend() {
         dasSolenoid.set(Value.kForward);
         frameExtended = true;
     }
     
+    /**
+     * Retracts the pneumatic pistons
+     */
     public void retract() {
         dasSolenoid.set(Value.kReverse);
         frameExtended = false;
     }
     
+    /**
+     * Whether or not the pneumatic pistons are extended
+     * 
+     * @return boolean
+     */
     public boolean isFrameExtended() {
         return frameExtended;
     }
