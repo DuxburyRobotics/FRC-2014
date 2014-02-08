@@ -27,6 +27,8 @@ public class Constants {
     public static final int COMPRESSOR_PORT_SWITCH = 1; //Digital IO ports
     public static final int COMPRESSOR_PORT_RELAY = 1;  //Relay ports
     public static final int DETECTOR_PORT = 5;
+    public static final int HATCH_PORT_FORWARD = 3;
+    public static final int HATCH_PORT_REVERSE = 4;
     
     /* DriveTrain constants */
     public static final double DRIVE_SENSITIVITY = 0.2;

@@ -16,6 +16,7 @@ import edu.duxburyrobotics.helpers.Constants;
 import edu.duxburyrobotics.subsystems.BallCaptureMechanism;
 import edu.duxburyrobotics.subsystems.DriveTrain;
 import edu.duxburyrobotics.subsystems.BallCaptureFrame;
+import edu.duxburyrobotics.subsystems.BallReleaseHatch;
 import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.Timer;
 
@@ -33,6 +34,7 @@ public class RobotMain extends SimpleRobot {
     public static DriveTrain drive;
     public static BallCaptureFrame ballCaptureFrame;
     public static BallCaptureMechanism ballCaptureMechanism;
+    public static BallReleaseHatch ballReleaseHatch;
     
     public RobotMain(){
         initOI();
@@ -57,6 +59,7 @@ public class RobotMain extends SimpleRobot {
     private void initSubsystems() {
         ballCaptureFrame = new BallCaptureFrame();
         ballCaptureMechanism = new BallCaptureMechanism();
+        ballReleaseHatch = new BallReleaseHatch();
     }
     
     /**

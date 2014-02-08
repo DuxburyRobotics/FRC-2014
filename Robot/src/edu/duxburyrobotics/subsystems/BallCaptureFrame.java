@@ -10,7 +10,6 @@ import edu.duxburyrobotics.commands.ToggleFrameCommand;
 import edu.duxburyrobotics.helpers.Constants;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -40,7 +39,7 @@ public class BallCaptureFrame extends Subsystem{
      * Extends the pneumatic pistons
      */
     public void extend() {
-        dasSolenoid.set(Value.kForward);
+        dasSolenoid.set(DoubleSolenoid.Value.kForward);
         frameExtended = true;
     }
     
@@ -48,7 +47,7 @@ public class BallCaptureFrame extends Subsystem{
      * Retracts the pneumatic pistons
      */
     public void retract() {
-        dasSolenoid.set(Value.kReverse);
+        dasSolenoid.set(DoubleSolenoid.Value.kReverse);
         frameExtended = false;
     }
     
