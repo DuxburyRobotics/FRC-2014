@@ -19,8 +19,8 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ManipulateBallCommand extends Command {
     
-    public void BallCommand(){
-        requires(RobotMain.ballCaptureMechanism);
+    public ManipulateBallCommand(){
+        this.requires(RobotMain.ballCaptureMechanism);
     }
 
     protected void initialize() {}
@@ -33,7 +33,10 @@ public class ManipulateBallCommand extends Command {
         return false;
     }
 
-    protected void end() {}
+    protected void end() {
+        //stop the spinning
+        RobotMain.ballCaptureMechanism.spinController(0);
+    }
 
     protected void interrupted() {
         end();

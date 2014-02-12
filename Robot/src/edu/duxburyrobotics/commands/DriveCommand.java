@@ -7,49 +7,42 @@
 package edu.duxburyrobotics.commands;
 
 import edu.duxburyrobotics.helpers.Constants;
+import edu.duxburyrobotics.io.OI;
 import edu.duxburyrobotics.robot.RobotMain;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  * @author Evan
  */
-public class RetractFrameCommand extends Command{
+public class DriveCommand extends Command{
     
-    boolean executed = false;
-    public RetractFrameCommand(){
-        //  the subsystem it requires
-        requires(RobotMain.ballCaptureFrame);
-        
-        //  we may need to adjust this value as appropriate, or it may work
-        setTimeout(Constants.ARM_MOVE_TIMEOUT);
+    public DriveCommand(){
+        requires(RobotMain.drive);
     }
 
     protected void initialize() {
-       executed = false;
     }
 
     protected void execute() {
-       // if (!executed){
-            RobotMain.ballCaptureFrame.retract();
-        //    executed = true;
-      //  }
+        Joystick joy = OI.right_Joystick.getJoystick();
+        boolean speedBoost = OI.right_Joystick.getButton(Constants.BUTTON_SPEED_BOOST).get();
+         
+        RobotMain.drive.twistThrottleDrive(joy,speedBoost);
     }
 
     protected boolean isFinished() {
-        return isTimedOut();
+        //drive never returns true
+        return false;
     }
 
     protected void end() {
-        
+        RobotMain.drive.stopDriving();
     }
 
     protected void interrupted() {
         end();
-    }
-    
-    private boolean isExecuted(){
-        return executed;
     }
     
 }

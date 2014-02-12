@@ -6,7 +6,6 @@
 
 package edu.duxburyrobotics.commands;
 
-import edu.duxburyrobotics.helpers.Constants;
 import edu.duxburyrobotics.robot.RobotMain;
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -14,34 +13,37 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  * @author Evan
  */
-public class RetractFrameCommand extends Command{
+public class ToggleBackCommand extends Command{
     
-    boolean executed = false;
-    public RetractFrameCommand(){
-        //  the subsystem it requires
-        requires(RobotMain.ballCaptureFrame);
-        
-        //  we may need to adjust this value as appropriate, or it may work
-        setTimeout(Constants.ARM_MOVE_TIMEOUT);
+    private boolean executed;
+    
+    public ToggleBackCommand(){
+        executed = false;
+        requires(RobotMain.backDrop);
     }
 
     protected void initialize() {
-       executed = false;
+        executed = false;
     }
 
     protected void execute() {
-       // if (!executed){
-            RobotMain.ballCaptureFrame.retract();
-        //    executed = true;
-      //  }
+        if (!executed){
+            if (RobotMain.backDrop.isDropped()){
+                RobotMain.backDrop.LiftDaBack();
+            }else{
+                RobotMain.backDrop.dropDaBack();
+            }
+            executed = true;
+        }
+        
     }
 
     protected boolean isFinished() {
-        return isTimedOut();
+        return isExecuted();
     }
 
     protected void end() {
-        
+        executed = false;
     }
 
     protected void interrupted() {
@@ -51,5 +53,7 @@ public class RetractFrameCommand extends Command{
     private boolean isExecuted(){
         return executed;
     }
+    
+    
     
 }
