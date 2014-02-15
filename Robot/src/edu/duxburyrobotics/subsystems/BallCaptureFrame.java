@@ -27,13 +27,12 @@ public class BallCaptureFrame extends Subsystem{
         frameExtended = false;
         compressor = new Compressor(Constants.COMPRESSOR_PORT_SWITCH, Constants.COMPRESSOR_PORT_RELAY);
         dasSolenoid = new DoubleSolenoid(Constants.SOLENOID_PORT_FORWARD, Constants.SOLENOID_PORT_REVERSE);
-        
-        setDefaultCommand(new ToggleFrameCommand());
-                
+        dasSolenoid.set(Value.kReverse);
         compressor.start();
     }
     
-    protected void initDefaultCommand() {}
+    protected void initDefaultCommand() {
+    }
     
     /**
      * Extends the pneumatic pistons

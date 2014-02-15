@@ -1,27 +1,53 @@
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package edu.duxburyrobotics.subsystems;
 
+import edu.duxburyrobotics.commands.DriveCommand;
 import edu.duxburyrobotics.helpers.Constants;
 import edu.duxburyrobotics.io.OI;
+import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.Victor;
+import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  *
- * @author Ben, Tate
+ * @author Ben, Tate, Evan
  * Creates a subclass of RobotDrive to specify our RobotDrive
  */
-public class DriveTrain extends RobotDrive{
+public class DriveTrain extends Subsystem{
+    
+    private RobotDrive roboDriveTrain;
+    public static Jaguar rightMotor1;
+    public static Jaguar leftMotor1;
+    public static Victor rightMotor2;
+    public static Jaguar leftMotor2;
     
     public DriveTrain(SpeedController frontLeftMotor, SpeedController rearLeftMotor, SpeedController frontRightMotor, SpeedController rearRightMotor) {
-        super(frontLeftMotor, rearLeftMotor, frontRightMotor, rearRightMotor);
+        //   super(frontLeftMotor, rearLeftMotor, frontRightMotor, rearRightMotor);
+        roboDriveTrain = new RobotDrive(frontLeftMotor, rearLeftMotor, frontRightMotor, rearRightMotor);
+    }
+    
+    public DriveTrain(){
+       rightMotor1 = new Jaguar(1, Constants.MOTOR_PORT_RIGHT1);
+       leftMotor1 = new Jaguar(1, Constants.MOTOR_PORT_LEFT1);
+       rightMotor2 = new Victor(1, Constants.MOTOR_PORT_RIGHT2);
+       leftMotor2 = new Jaguar(1, Constants.MOTOR_PORT_LEFT2);
+    
+        
+        roboDriveTrain = new RobotDrive(leftMotor1, leftMotor2, rightMotor1, rightMotor2);
+        roboDriveTrain.setInvertedMotor(RobotDrive.MotorType.kFrontRight, true);
+        roboDriveTrain.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
+        roboDriveTrain.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
+        roboDriveTrain.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
+        roboDriveTrain.setMaxOutput(Constants.DRIVE_MAX_POWER);
+   
+        roboDriveTrain.setSensitivity(Constants.DRIVE_SENSITIVITY);
+    }
+    
+    protected void initDefaultCommand() {
+        setDefaultCommand(new DriveCommand());
     }
     
     /**
@@ -39,10 +65,10 @@ public class DriveTrain extends RobotDrive{
             newData =  (((throttleData) * (1.0 - Constants.DRIVE_MIN_POWER)) / 1.0) + Constants.DRIVE_MIN_POWER; //Don't touch, magic ahead.
         }
         
-        double driveSpeed = stick.getY() * newData * -1.0;
-        double turnSpeed = stick.getTwist() * newData * Constants.DRIVE_TURN_MULTIPLIER * -1.0;
+        double driveSpeed = stick.getY() * newData;// * -1.0;
+        double turnSpeed = stick.getTwist() * newData * Constants.DRIVE_TURN_MULTIPLIER;// * -1.0;
         
-        this.arcadeDrive(driveSpeed, turnSpeed);
+        roboDriveTrain.arcadeDrive(driveSpeed, turnSpeed);
     }
     
     /**
@@ -53,7 +79,7 @@ public class DriveTrain extends RobotDrive{
      */
     public void driveDebug(){
         if (OI.right_Joystick.getButton(2).get())       
-            arcadeDrive(OI.right_Joystick.getJoystick());
+            roboDriveTrain.arcadeDrive(OI.right_Joystick.getJoystick());
         else
             twistThrottleDrive(OI.right_Joystick.getJoystick(), OI.right_Joystick.getButton(1).get());
     }
@@ -65,18 +91,39 @@ public class DriveTrain extends RobotDrive{
      * @param power Value from -1.0 to 1.0 to control the speed of the motor
      */
     public void autonomousDrive(final double power) {
-        drive(power, 0.0);
+        roboDriveTrain.drive(power, 0.0);
     }
     
     /**
      * Convenience method to stop the motors from turning
      */
     public void stopDriving() {
-        drive(0.0, 0.0);
+        roboDriveTrain.drive(0.0, 0.0);
     }
     
     public void superdrive(){
         //This method must never be deleted!
         //Doing so will break the entire program!
     }
+    
+    public RobotDrive getDrive(){
+        return roboDriveTrain;
+    }
+    
+    public Jaguar getRightMotor(){
+        return rightMotor1;
+    }
+    
+    public Victor getRightMotor2(){
+        return rightMotor2;
+    }
+    
+    public Jaguar getLeftMotor(){
+        return leftMotor1;
+    }
+    
+    public Jaguar getLeftMotor2(){
+        return leftMotor2;
+    }
+    
 }

@@ -6,32 +6,25 @@
 
 package edu.duxburyrobotics.commands;
 
-import edu.duxburyrobotics.helpers.Constants;
 import edu.duxburyrobotics.robot.RobotMain;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * delete this later, it's just here for debugging purposes
  * @author Evan
  */
-public class ExtendFrameCommand extends Command{
-    
-    boolean executed = false;
-    
-    public ExtendFrameCommand(){
-        requires(RobotMain.ballCaptureFrame);
-        
-        //set timeout may need to adjust
-        setTimeout(Constants.ARM_MOVE_TIMEOUT);
+public class MoveForward extends Command{
+
+    public MoveForward(){
+       setTimeout(3.0);
+       requires(RobotMain.drive);
     }
     
     protected void initialize() {
-        executed = false;
     }
 
     protected void execute() {
-         RobotMain.ballCaptureFrame.extend();
-      
+        RobotMain.drive.autonomousDrive(1.0);
     }
 
     protected boolean isFinished() {
@@ -39,16 +32,12 @@ public class ExtendFrameCommand extends Command{
     }
 
     protected void end() {
+        RobotMain.drive.stopDriving();
         
     }
 
     protected void interrupted() {
         end();
-    }
-    
-    
-     private boolean isExecuted(){
-        return executed;
     }
     
 }

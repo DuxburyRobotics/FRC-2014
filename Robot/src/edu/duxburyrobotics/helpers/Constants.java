@@ -24,6 +24,8 @@ public class Constants {
     public static final int MOTOR_PORT_CAPTURE = 5;
     public static final int SOLENOID_PORT_FORWARD = 1;
     public static final int SOLENOID_PORT_REVERSE = 2;
+    public static final int BACK_SOLENOID_PORT_FORWARD = 4;
+    public static final int BACK_SOLENOID_PORT_BACKWARDS = 3 ;
     public static final int COMPRESSOR_PORT_SWITCH = 1; //Digital IO ports
     public static final int COMPRESSOR_PORT_RELAY = 1;  //Relay ports
     public static final int DETECTOR_PORT = 5;
@@ -41,8 +43,9 @@ public class Constants {
     public static final int BUTTON_SPEED_BOOST = 1;
     public static final int BUTTON_CAPTURE_BALL = 1;
     public static final int BUTTON_RELEASE_BALL = 2;
-    public static final int BUTTON_TOGGLE_FRAME = 3;
+    public static final int BUTTON_TOGGLE_FRAME = 1;
+    public static final int Button_Toggle_Back = 2;
     
     /* Timeout for the lifting and lowering of arms */
-    public static final double ARM_MOVE_TIMEOUT = 0.5;
+    public static final double ARM_MOVE_TIMEOUT = 1.5;
 }
