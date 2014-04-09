@@ -7,6 +7,8 @@
 
 package edu.duxburyrobotics.robot;
 
+import edu.duxburyrobotics.commands.AutoSequentialCommand;
+import edu.duxburyrobotics.commands.AutonomousCommand;
 import edu.duxburyrobotics.commands.ManipulateBallCommand;
 import edu.duxburyrobotics.commands.ToggleFrameCommand;
 import edu.duxburyrobotics.io.OI;
@@ -20,6 +22,7 @@ import edu.duxburyrobotics.subsystems.BallCaptureFrame;
 import edu.wpi.first.wpilibj.Jaguar;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.Scheduler;
 
 /**
@@ -38,10 +41,14 @@ public class RobotMain extends SimpleRobot {
     public static BallCaptureMechanism ballCaptureMechanism;
     public static BackDrop backDrop;
     
+    public static CommandGroup autoCommand;
+    
     public RobotMain(){
         initSubsystems();
         initOI();
-       // initDriveTrain();
+        
+        autoCommand = new AutoSequentialCommand();
+        System.out.println("Constructor called");
     }
     
     /**
@@ -69,32 +76,24 @@ public class RobotMain extends SimpleRobot {
         //TODO: These need to be changed to match physical setup!
         Jaguar rightMotor1 = new Jaguar(1, Constants.MOTOR_PORT_RIGHT1);
         Jaguar leftMotor1 = new Jaguar(1, Constants.MOTOR_PORT_LEFT1);
-        Victor rightMotor2 = new Victor(1, Constants.MOTOR_PORT_RIGHT2);
+        Victor rightMotor2  = new Victor(1, Constants.MOTOR_PORT_RIGHT2);
         Jaguar leftMotor2 = new Jaguar(1, Constants.MOTOR_PORT_LEFT2);
-        
-        
-        
-     //   drive = new DriveTrain(leftMotor1, leftMotor2, rightMotor1, rightMotor2);
-      //  drive.setInvertedMotor(RobotDrive.MotorType.kFrontRight, true);
-       // drive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
-       // drive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
-      //  drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
-      //  drive.setMaxOutput(Constants.DRIVE_MAX_POWER);
-   
-     //   drive.setSensitivity(Constants.DRIVE_SENSITIVITY);
-        
-        
+  
     }
     
     /**
      * This function is called once each time the robot enters autonomous mode.
      */
     public void autonomous() {
-        System.out.println("Autonomous Mode Enabled");
-        drive.autonomousDrive(0.75);
-        Timer.delay(52.5);
-        drive.stopDriving();
-        
+         if (autoCommand != null){
+              autoCommand.start();
+              System.out.println("AutoCommand is not null");
+          }
+         
+      while(isAutonomous() && isEnabled()){
+         Scheduler.getInstance().run();
+      }
+
     }
 
     /**
@@ -109,6 +108,7 @@ public class RobotMain extends SimpleRobot {
         System.out.println("/***********************************/");
       
        // drive.setSafetyEnabled(true);
+        if (autoCommand != null) autoCommand.cancel();
         
         while (isEnabled() && isOperatorControl()){
             

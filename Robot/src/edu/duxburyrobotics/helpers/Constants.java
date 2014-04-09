@@ -34,8 +34,9 @@ public class Constants {
     public static final double DRIVE_SENSITIVITY = 0.2;
     public static final double DRIVE_MIN_POWER = 0.55;
     public static final double DRIVE_MAX_POWER = 1.0;
-    public static final double DRIVE_TURN_MULTIPLIER = 1.0;
+    public static final double DRIVE_TURN_MULTIPLIER = 0.8;
     public static final double DRIVE_BOOST = 1.5;
+    public static double ADJUSTMENT = 0.14;
     
     /* Button index constants */
     public static final int BUTTON_SPEED_BOOST = 1;
