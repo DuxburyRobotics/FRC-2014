@@ -26,10 +26,13 @@ public class DriveCommand extends Command{
     }
 
     protected void execute() {
+        /*
         Joystick joy = OI.right_Joystick.getJoystick();
         boolean speedBoost = OI.right_Joystick.getButton(Constants.BUTTON_SPEED_BOOST).get();
-         
         RobotMain.drive.twistThrottleDrive(joy,speedBoost);
+        */
+        
+        RobotMain.drive.driveDebug();
     }
 
     protected boolean isFinished() {

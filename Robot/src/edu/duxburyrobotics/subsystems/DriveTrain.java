@@ -30,6 +30,7 @@ public class DriveTrain extends Subsystem{
     }
     
     public DriveTrain(){
+       
        rightMotor1 = new Jaguar(1, Constants.MOTOR_PORT_RIGHT1);
        leftMotor1 = new Jaguar(1, Constants.MOTOR_PORT_LEFT1);
        rightMotor2 = new Victor(1, Constants.MOTOR_PORT_RIGHT2);
@@ -42,8 +43,9 @@ public class DriveTrain extends Subsystem{
         roboDriveTrain.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
         roboDriveTrain.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
         roboDriveTrain.setMaxOutput(Constants.DRIVE_MAX_POWER);
-   
         roboDriveTrain.setSensitivity(Constants.DRIVE_SENSITIVITY);
+        
+        
     }
     
     protected void initDefaultCommand() {
@@ -68,6 +70,11 @@ public class DriveTrain extends Subsystem{
         double driveSpeed = stick.getY() * newData;// * -1.0;
         double turnSpeed = stick.getTwist() * newData * Constants.DRIVE_TURN_MULTIPLIER;// * -1.0;
         
+        if (Math.abs(turnSpeed) <= 0.07f){
+        //if(!(turnSpeed >= 0-Constants.ADJUSTMENT && turnSpeed <= )){
+            turnSpeed += Constants.ADJUSTMENT; 
+        }
+        
         roboDriveTrain.arcadeDrive(driveSpeed, turnSpeed);
     }
     
@@ -91,7 +98,7 @@ public class DriveTrain extends Subsystem{
      * @param power Value from -1.0 to 1.0 to control the speed of the motor
      */
     public void autonomousDrive(final double power) {
-        roboDriveTrain.drive(power, 0.0);
+        roboDriveTrain.drive(power, Constants.ADJUSTMENT * 0.7);
     }
     
     /**

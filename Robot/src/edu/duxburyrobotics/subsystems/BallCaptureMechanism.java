@@ -36,7 +36,6 @@ public class BallCaptureMechanism extends Subsystem {
     }
     
     /**
-     * Decreases raw value to 1/4 before passing it to motor
      * 
      * @param value - Raw value in the range of -1.0 to 1.0
      */
