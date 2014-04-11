@@ -17,14 +17,14 @@ public class MoveBackward extends Command{
     
     public MoveBackward(){
        setTimeout(3.0);
-       requires(RobotMain.drive);
+       requires(RobotMain.driveTrain);
     }
     
     protected void initialize() {
     }
 
     protected void execute() {
-        RobotMain.drive.autonomousDrive(-1.0);
+        RobotMain.driveTrain.autonomousDrive(-1.0);
     }
 
     protected boolean isFinished() {
@@ -32,7 +32,7 @@ public class MoveBackward extends Command{
     }
 
     protected void end() {
-        RobotMain.drive.stopDriving();
+        RobotMain.driveTrain.stopDriving();
     }
 
     protected void interrupted() {

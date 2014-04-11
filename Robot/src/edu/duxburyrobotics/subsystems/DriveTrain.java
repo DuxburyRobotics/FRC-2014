@@ -18,25 +18,24 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class DriveTrain extends Subsystem{
     
-    private RobotDrive roboDriveTrain;
+    private final RobotDrive roboDriveTrain;
     public static Jaguar rightMotor1;
     public static Jaguar leftMotor1;
     public static Victor rightMotor2;
     public static Jaguar leftMotor2;
+    private double desiredVelocity;
+    private double currentVelocity;
     
     public DriveTrain(SpeedController frontLeftMotor, SpeedController rearLeftMotor, SpeedController frontRightMotor, SpeedController rearRightMotor) {
-        //   super(frontLeftMotor, rearLeftMotor, frontRightMotor, rearRightMotor);
         roboDriveTrain = new RobotDrive(frontLeftMotor, rearLeftMotor, frontRightMotor, rearRightMotor);
     }
     
     public DriveTrain(){
-       
        rightMotor1 = new Jaguar(1, Constants.MOTOR_PORT_RIGHT1);
        leftMotor1 = new Jaguar(1, Constants.MOTOR_PORT_LEFT1);
        rightMotor2 = new Victor(1, Constants.MOTOR_PORT_RIGHT2);
        leftMotor2 = new Jaguar(1, Constants.MOTOR_PORT_LEFT2);
     
-        
         roboDriveTrain = new RobotDrive(leftMotor1, leftMotor2, rightMotor1, rightMotor2);
         roboDriveTrain.setInvertedMotor(RobotDrive.MotorType.kFrontRight, true);
         roboDriveTrain.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, true);
@@ -44,8 +43,6 @@ public class DriveTrain extends Subsystem{
         roboDriveTrain.setInvertedMotor(RobotDrive.MotorType.kRearLeft, true);
         roboDriveTrain.setMaxOutput(Constants.DRIVE_MAX_POWER);
         roboDriveTrain.setSensitivity(Constants.DRIVE_SENSITIVITY);
-        
-        
     }
     
     protected void initDefaultCommand() {
@@ -79,6 +76,34 @@ public class DriveTrain extends Subsystem{
     }
     
     /**
+     * Same as the twist drive, except there is no concept of a boost, maximum 
+     * speed is engaged at all times. Also, there is minor correction for Tate
+     * Spazz mode.
+     */
+    public void eliteDrive() {
+        final Joystick stick = OI.right_Joystick.getJoystick();
+        
+        final double driveSpeed = stick.getY();
+        double turnSpeed = stick.getTwist() * Constants.DRIVE_TURN_MULTIPLIER;
+        
+        if (Math.abs(turnSpeed) <= 0.07)
+            turnSpeed += Constants.ADJUSTMENT;
+        
+        desiredVelocity = driveSpeed;
+        if (desiredVelocity > currentVelocity)
+            currentVelocity += 0.1;
+        else if (desiredVelocity < currentVelocity)
+            currentVelocity -= 0.1;
+        
+        if (currentVelocity > 1.0)
+            currentVelocity = 1.0;
+        else if (currentVelocity < -1.0)
+            currentVelocity = -1.0;
+        
+        roboDriveTrain.arcadeDrive(currentVelocity, turnSpeed);
+    }
+    
+    /**
      * This method should be called to drive if the user wants the choice
      * between twist turning and x-axis turning. x-axis turning sucks and Piers 
      * is a silly goose that doesn't know what he's talking about, so 
@@ -98,7 +123,7 @@ public class DriveTrain extends Subsystem{
      * @param power Value from -1.0 to 1.0 to control the speed of the motor
      */
     public void autonomousDrive(final double power) {
-        roboDriveTrain.drive(power, Constants.ADJUSTMENT * 0.7);
+        roboDriveTrain.drive(power, Constants.ADJUSTMENT * 0.4);
     }
     
     /**

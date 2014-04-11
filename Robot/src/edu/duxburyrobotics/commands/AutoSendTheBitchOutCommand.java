@@ -13,11 +13,12 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  * @author Evan
  */
-public class AutoSendTheBitchOutCommand extends Command{
+public class AutoSendTheBitchOutCommand extends Command {
 
     public AutoSendTheBitchOutCommand(){
         this.requires(RobotMain.ballCaptureMechanism);
     }
+    
     protected void initialize() {
         
     }
@@ -37,5 +38,4 @@ public class AutoSendTheBitchOutCommand extends Command{
     protected void interrupted() {
         end();
     }
-    
 }

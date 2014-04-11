@@ -14,40 +14,37 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  * @author Evan
  */
-public class BackDrop extends Subsystem{
+public class RearGate extends Subsystem{
     
-    private final DoubleSolenoid solenoid;
+    private final DoubleSolenoid hatchController;
     private boolean dropped;
-    public BackDrop(){
-        solenoid = new DoubleSolenoid(Constants.BACK_SOLENOID_PORT_FORWARD, Constants.BACK_SOLENOID_PORT_BACKWARDS);
+    
+    public RearGate(){
+        hatchController = new DoubleSolenoid(Constants.BACK_SOLENOID_PORT_FORWARD, Constants.BACK_SOLENOID_PORT_BACKWARDS);
         dropped = false;
     }
 
-    protected void initDefaultCommand() {
-    }
+    protected void initDefaultCommand() { }
     
     /**
-     * extends the solenoid forwards effectivly dropping the back
+     * extends the hatchController forwards effectively dropping the back
      * ball holding metal thing of the robot
      */
-    public void dropDaBack(){
-        solenoid.set(DoubleSolenoid.Value.kForward);
+    public void dropBack(){
+        hatchController.set(DoubleSolenoid.Value.kForward);
         dropped = true;
     }
     
     /**
-     * extends the solenoid backwards effectivly dropping the back
+     * extends the hatchController backwards effectively dropping the back
      * ball holding metal thing of the robot
      */
-    public void LiftDaBack(){
-        solenoid.set(DoubleSolenoid.Value.kReverse);
+    public void liftBack(){
+        hatchController.set(DoubleSolenoid.Value.kReverse);
         dropped = false;
     }
     
     public boolean isDropped(){
         return dropped;
-    }
-    
-    
-    
+    }    
 }

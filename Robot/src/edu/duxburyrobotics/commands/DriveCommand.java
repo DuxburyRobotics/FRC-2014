@@ -6,10 +6,7 @@
 
 package edu.duxburyrobotics.commands;
 
-import edu.duxburyrobotics.helpers.Constants;
-import edu.duxburyrobotics.io.OI;
 import edu.duxburyrobotics.robot.RobotMain;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -19,33 +16,25 @@ import edu.wpi.first.wpilibj.command.Command;
 public class DriveCommand extends Command{
     
     public DriveCommand(){
-        requires(RobotMain.drive);
+        requires(RobotMain.driveTrain);
     }
 
-    protected void initialize() {
-    }
+    protected void initialize() { }
 
-    protected void execute() {
-        /*
-        Joystick joy = OI.right_Joystick.getJoystick();
-        boolean speedBoost = OI.right_Joystick.getButton(Constants.BUTTON_SPEED_BOOST).get();
-        RobotMain.drive.twistThrottleDrive(joy,speedBoost);
-        */
-        
-        RobotMain.drive.driveDebug();
+    protected void execute() {        
+        //RobotMain.driveTrain.driveDebug();
+        RobotMain.driveTrain.eliteDrive();
     }
 
     protected boolean isFinished() {
-        //drive never returns true
         return false;
     }
 
     protected void end() {
-        RobotMain.drive.stopDriving();
+        RobotMain.driveTrain.stopDriving();
     }
 
     protected void interrupted() {
         end();
     }
-    
 }

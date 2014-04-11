@@ -6,10 +6,10 @@
 
 package edu.duxburyrobotics.subsystems;
 
-import edu.duxburyrobotics.commands.ToggleFrameCommand;
 import edu.duxburyrobotics.helpers.Constants;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -17,28 +17,29 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  * @author Evan, Tate
  */
 
-public class BallCaptureFrame extends Subsystem{
+public class BallCaptureFrame extends Subsystem {
 
     private boolean frameExtended;
     private final Compressor compressor;
-    private final DoubleSolenoid dasSolenoid;
+    private final DoubleSolenoid frameController;
 
     public BallCaptureFrame() {
         frameExtended = false;
+        
         compressor = new Compressor(Constants.COMPRESSOR_PORT_SWITCH, Constants.COMPRESSOR_PORT_RELAY);
-        dasSolenoid = new DoubleSolenoid(Constants.SOLENOID_PORT_FORWARD, Constants.SOLENOID_PORT_REVERSE);
-        dasSolenoid.set(Value.kReverse);
+        frameController = new DoubleSolenoid(Constants.SOLENOID_PORT_FORWARD, Constants.SOLENOID_PORT_REVERSE);
+        
+        frameController.set(Value.kReverse);
         compressor.start();
     }
     
-    protected void initDefaultCommand() {
-    }
+    protected void initDefaultCommand() { }
     
     /**
      * Extends the pneumatic pistons
      */
     public void extend() {
-        dasSolenoid.set(DoubleSolenoid.Value.kForward);
+        frameController.set(DoubleSolenoid.Value.kForward);
         frameExtended = true;
     }
     
@@ -46,7 +47,7 @@ public class BallCaptureFrame extends Subsystem{
      * Retracts the pneumatic pistons
      */
     public void retract() {
-        dasSolenoid.set(DoubleSolenoid.Value.kReverse);
+        frameController.set(DoubleSolenoid.Value.kReverse);
         frameExtended = false;
     }
     

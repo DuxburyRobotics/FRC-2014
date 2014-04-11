@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  * @author Evan
  */
-public class ToggleBackCommand extends Command{
+public class ToggleBackCommand extends Command {
     
     private boolean executed;
     
@@ -28,14 +28,13 @@ public class ToggleBackCommand extends Command{
 
     protected void execute() {
         if (!executed){
-            if (RobotMain.backDrop.isDropped()){
-                RobotMain.backDrop.LiftDaBack();
-            }else{
-                RobotMain.backDrop.dropDaBack();
-            }
+            if (RobotMain.backDrop.isDropped())
+                RobotMain.backDrop.liftBack();
+            else
+                RobotMain.backDrop.dropBack();
+            
             executed = true;
         }
-        
     }
 
     protected boolean isFinished() {
@@ -53,7 +52,4 @@ public class ToggleBackCommand extends Command{
     private boolean isExecuted(){
         return executed;
     }
-    
-    
-    
 }

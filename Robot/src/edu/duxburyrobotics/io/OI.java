@@ -57,20 +57,20 @@ public class OI {
         SmartDashboard.putNumber("SPEED", -1.0);
         SmartDashboard.putNumber("Right Joystick: Y-value ", OI.right_Joystick.getJoystick().getY());
         SmartDashboard.putNumber("Left Joystick: Y-value ", OI.left_Joystick.getJoystick().getY());
-        SmartDashboard.putNumber("Left Motor 1 : Speed: ", RobotMain.drive.getLeftMotor().getSpeed());
-        SmartDashboard.putNumber("Left Motor 2 : Speed: ", RobotMain.drive.getLeftMotor2().getSpeed());
-        SmartDashboard.putNumber("Right Motor 1: Speed: ", RobotMain.drive.getRightMotor().getSpeed());
-        SmartDashboard.putNumber("Right Motor 2: Speed: ", RobotMain.drive.getRightMotor2().getSpeed());
+        SmartDashboard.putNumber("Left Motor 1 : Speed: ", RobotMain.driveTrain.getLeftMotor().getSpeed());
+        SmartDashboard.putNumber("Left Motor 2 : Speed: ", RobotMain.driveTrain.getLeftMotor2().getSpeed());
+        SmartDashboard.putNumber("Right Motor 1: Speed: ", RobotMain.driveTrain.getRightMotor().getSpeed());
+        SmartDashboard.putNumber("Right Motor 2: Speed: ", RobotMain.driveTrain.getRightMotor2().getSpeed());
         SmartDashboard.putNumber("Top Motor    : Speed: ", RobotMain.ballCaptureMechanism.getMotor().getSpeed());
         SmartDashboard.putNumber("Adjustment Value: ", Constants.ADJUSTMENT);
     }
     public static void updateDashboard(){
         SmartDashboard.putNumber("Right Joystick: Y-value ", OI.right_Joystick.getJoystick().getY());
         SmartDashboard.putNumber("Left Joystick: Y-value ", OI.left_Joystick.getJoystick().getY());
-        SmartDashboard.putNumber("Left Motor 1 : Speed: ", RobotMain.drive.getLeftMotor().getSpeed());
-        SmartDashboard.putNumber("Left Motor 2 : Speed: ", RobotMain.drive.getLeftMotor2().getSpeed());
-        SmartDashboard.putNumber("Right Motor 1: Speed: ", RobotMain.drive.getRightMotor().getSpeed());
-        SmartDashboard.putNumber("Right Motor 2: Speed: ", RobotMain.drive.getRightMotor2().getSpeed());
+        SmartDashboard.putNumber("Left Motor 1 : Speed: ", RobotMain.driveTrain.getLeftMotor().getSpeed());
+        SmartDashboard.putNumber("Left Motor 2 : Speed: ", RobotMain.driveTrain.getLeftMotor2().getSpeed());
+        SmartDashboard.putNumber("Right Motor 1: Speed: ", RobotMain.driveTrain.getRightMotor().getSpeed());
+        SmartDashboard.putNumber("Right Motor 2: Speed: ", RobotMain.driveTrain.getRightMotor2().getSpeed());
         SmartDashboard.putNumber("Top Motor    : Speed: ", RobotMain.ballCaptureMechanism.getMotor().getSpeed());
         SmartDashboard.putNumber("Adjustment Value: ", Constants.ADJUSTMENT);
         

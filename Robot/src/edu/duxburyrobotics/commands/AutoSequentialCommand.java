@@ -12,11 +12,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  *
  * @author Evan
  */
-public class AutoSequentialCommand extends CommandGroup{
+public class AutoSequentialCommand extends CommandGroup {
     
     public AutoSequentialCommand(){
         this.addSequential(new AutonomousCommand(), 6.0);
-        this.addSequential(new AutoSendTheBitchOutCommand(),2);
+        this.addSequential(new AutoSendTheBitchOutCommand(), 2.0);
     }
-    
 }

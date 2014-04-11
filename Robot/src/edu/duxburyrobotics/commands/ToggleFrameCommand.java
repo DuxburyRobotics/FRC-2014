@@ -21,8 +21,7 @@ public class ToggleFrameCommand extends Command {
         requires(RobotMain.ballCaptureFrame);
     }
 
-    protected void initialize() {
-    }
+    protected void initialize() { }
 
     protected void execute() {  
         if (!didExecute) {

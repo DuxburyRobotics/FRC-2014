@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class AutonomousCommand extends Command{
     
     public AutonomousCommand(){
-        this.requires(RobotMain.drive);
+        this.requires(RobotMain.driveTrain);
     }
 
     protected void initialize() {
@@ -29,7 +29,7 @@ public class AutonomousCommand extends Command{
 
     protected void execute() {
       //  System.out.println("WE ARE EXECTUING");
-        RobotMain.drive.autonomousDrive(-0.4);
+        RobotMain.driveTrain.autonomousDrive(-0.4);
     }
 
     protected boolean isFinished() {
@@ -39,7 +39,7 @@ public class AutonomousCommand extends Command{
     }
 
     protected void end() {
-        RobotMain.drive.stopDriving();
+        RobotMain.driveTrain.stopDriving();
        // System.out.println("AUTO ENDED");
     }
 
